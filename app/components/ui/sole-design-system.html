@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SOLE. — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       SOLE. DESIGN SYSTEM — MASTER STYLESHEET
+       All tokens, components, and utilities in one file.
+       ============================================================ */
+
+    /* ────────────────────────────────────────────────────────────
+       1. DESIGN TOKENS — CSS Custom Properties
+       ────────────────────────────────────────────────────────────
+       The single source of truth for all visual decisions.
+       Never hardcode values — always reference a token.
+    ──────────────────────────────────────────────────────────── */
+
+    :root {
+
+      /* COLOR PALETTE
+         ─────────────
+         Core palette is strictly monochromatic. Black, white,
+         and two warm off-whites for depth and layering.
+      */
+      --color-black:        #0a0a0a;   /* Primary text, borders, fills */
+      --color-white:        #f5f2ee;   /* Page background (warm white) */
+      --color-cream:        #e8e4dc;   /* Surface / card alt background */
+      --color-cream-dark:   #d8d4cc;   /* Hover state surfaces */
+      --color-gray-100:     #f0ede8;   /* Lightest gray surface */
+      --color-gray-300:     #cccccc;   /* Muted borders */
+      --color-gray-500:     #888888;   /* Secondary text */
+      --color-gray-700:     #444444;   /* Body text */
+      --color-gray-900:     #1a1a1a;   /* Near-black for contrast layers */
+
+      /* TYPOGRAPHY
+         ──────────
+         Three font roles. Each has a specific use case.
+         Never substitute across roles.
+      */
+      --font-display:   'Bebas Neue', cursive;         /* Hero titles, section headings, price tags */
+      --font-mono:      'Space Mono', monospace;       /* Labels, tags, navigation, metadata */
+      --font-body:      'Barlow Condensed', sans-serif;/* Body copy, descriptions, CTAs */
+
+      /* FONT SIZES — Fluid Type Scale */
+      --text-2xs:   0.625rem;   /* 10px — tiny labels */
+      --text-xs:    0.72rem;    /* 11.5px — micro tags */
+      --text-sm:    0.85rem;    /* 13.6px — captions */
+      --text-base:  1rem;       /* 16px — base body */
+      --text-lg:    1.15rem;    /* 18.4px — lead body */
+      --text-xl:    1.35rem;    /* 21.6px — large body */
+      --text-2xl:   1.6rem;     /* 25.6px — small heading */
+      --text-3xl:   2rem;       /* 32px — card heading */
+      --text-4xl:   2.8rem;     /* 44.8px — price/stat */
+      --text-5xl:   3.5rem;     /* 56px — section title */
+      --text-6xl:   5rem;       /* 80px — hero sub */
+      --text-7xl:   7rem;       /* 112px — hero display */
+      --text-8xl:   clamp(5rem, 11vw, 10rem); /* Responsive hero */
+
+      /* FONT WEIGHTS */
+      --weight-regular: 400;
+      --weight-semibold: 600;
+      --weight-bold:    700;
+      --weight-black:   900;
+
+      /* LINE HEIGHTS */
+      --leading-none:   0.9;
+      --leading-tight:  1.1;
+      --leading-snug:   1.3;
+      --leading-normal: 1.6;
+      --leading-loose:  1.8;
+
+      /* LETTER SPACING */
+      --tracking-tight:  -0.02em;
+      --tracking-normal:  0;
+      --tracking-wide:    0.08em;
+      --tracking-wider:   0.15em;
+      --tracking-widest:  0.25em;
+
+      /* SPACING SCALE — 4px base unit */
+      --space-1:   0.25rem;   /* 4px */
+      --space-2:   0.5rem;    /* 8px */
+      --space-3:   0.75rem;   /* 12px */
+      --space-4:   1rem;      /* 16px */
+      --space-5:   1.25rem;   /* 20px */
+      --space-6:   1.5rem;    /* 24px */
+      --space-8:   2rem;      /* 32px */
+      --space-10:  2.5rem;    /* 40px */
+      --space-12:  3rem;      /* 48px */
+      --space-16:  4rem;      /* 64px */
+      --space-20:  5rem;      /* 80px */
+      --space-24:  6rem;      /* 96px */
+      --space-32:  8rem;      /* 128px */
+
+      /* BORDERS
+         ────────
+         All borders are solid black, consistent weight.
+         Neubrutalism depends on this discipline.
+      */
+      --border-width:    3px;
+      --border-width-sm: 2px;
+      --border-style:    solid;
+      --border-color:    var(--color-black);
+      --border:          var(--border-width) var(--border-style) var(--border-color);
+      --border-sm:       var(--border-width-sm) var(--border-style) var(--border-color);
+
+      /* SHADOWS
+         ────────
+         Hard offset box-shadows are the neubrutalism signature.
+         Never use blurred/diffuse shadows.
+      */
+      --shadow-xs:   2px 2px 0px var(--color-black);
+      --shadow-sm:   3px 3px 0px var(--color-black);
+      --shadow-md:   6px 6px 0px var(--color-black);
+      --shadow-lg:  10px 10px 0px var(--color-black);
+      --shadow-xl:  14px 14px 0px var(--color-black);
+
+      /* Shadow on dark backgrounds */
+      --shadow-invert-sm: 3px 3px 0px rgba(255,255,255,0.25);
+      --shadow-invert-md: 6px 6px 0px rgba(255,255,255,0.2);
+
+      /* BORDER RADIUS
+         ──────────────
+         Neubrutalism is predominantly sharp-cornered.
+         Use radius sparingly and only for specific components.
+      */
+      --radius-none:  0;
+      --radius-sm:    4px;    /* Pill tags only */
+      --radius-full:  9999px; /* Circles / avatars */
+
+      /* Z-INDEX SCALE */
+      --z-base:    0;
+      --z-raised:  10;
+      --z-overlay: 100;
+      --z-modal:   200;
+      --z-cursor:  9999;
+
+      /* TRANSITIONS */
+      --transition-fast:   0.12s ease;
+      --transition-base:   0.2s ease;
+      --transition-slow:   0.35s ease;
+      --transition-spring: 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* LAYOUT */
+      --container-max:  1280px;
+      --container-pad:  2.5rem;
+      --grid-cols:      12;
+      --grid-gap:       0;  /* Neubrutalism uses borders instead of gaps */
+    }
+
+
+    /* ────────────────────────────────────────────────────────────
+       2. RESET & BASE STYLES
+    ──────────────────────────────────────────────────────────── */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-white);
+      color: var(--color-black);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: var(--leading-normal);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { cursor: pointer; font-family: inherit; }
+
+
+    /* ────────────────────────────────────────────────────────────
+      3. TYPOGRAPHY SYSTEM
+    ──────────────────────────────────────────────────────────── */
+
+    /* Display — Bebas Neue, for hero/section titles */
+    .type-display-hero {
+      font-family: var(--font-display);
+      font-size: var(--text-8xl);
+      line-height: var(--leading-none);
+      letter-spacing: var(--tracking-tight);
+    }
+    .type-display-xl {
+      font-family: var(--font-display);
+      font-size: var(--text-6xl);
+      line-height: var(--leading-none);
+      letter-spacing: 0.01em;
+    }
+    .type-display-lg {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      line-height: var(--leading-tight);
+      letter-spacing: 0.02em;
+    }
+    .type-display-md {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      line-height: var(--leading-snug);
+    }
+    .type-display-sm {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      line-height: var(--leading-snug);
+    }
+
+    /* Outlined display variant */
+    .type-outline {
+      -webkit-text-stroke: 3px var(--color-black);
+      color: transparent;
+    }
+    .type-outline-white {
+      -webkit-text-stroke: 3px var(--color-white);
+      color: transparent;
+    }
+
+    /* Body — Barlow Condensed */
+    .type-body-lg {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      line-height: var(--leading-normal);
+    }
+    .type-body-base {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: var(--leading-normal);
+    }
+    .type-body-sm {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      line-height: var(--leading-normal);
+    }
+
+    /* Mono — Space Mono, for labels, metadata */
+    .type-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+    }
+    .type-label-sm {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+    }
+    .type-mono {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      letter-spacing: var(--tracking-wide);
+    }
+
+
+    /* ────────────────────────────────────────────────────────────
+       4. COMPONENT LIBRARY
+    ──────────────────────────────────────────────────────────── */
+
+    /* ── 4a. BUTTONS ── */
+
+    /* Base button reset + shared traits */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      text-decoration: none;
+      border: var(--border);
+      cursor: pointer;
+      transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .btn:hover {
+      transform: translate(6px, 6px);
+      box-shadow: none !important;
+    }
+    .btn:active {
+      transform: translate(8px, 8px);
+    }
+
+    /* Sizes */
+    .btn-sm  { font-size: var(--text-xs);  padding: var(--space-2) var(--space-5);  }
+    .btn-md  { font-size: var(--text-sm);  padding: var(--space-3) var(--space-8);  }
+    .btn-lg  { font-size: var(--text-base);padding: var(--space-4) var(--space-10); }
+    .btn-xl  { font-size: var(--text-lg);  padding: var(--space-5) var(--space-12); }
+
+    /* Variants */
+    .btn-primary {
+      background: var(--color-black);
+      color:      var(--color-white);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-ghost {
+      background: transparent;
+      color:      var(--color-black);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-white {
+      background: var(--color-white);
+      color:      var(--color-black);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-cream {
+      background: var(--color-cream);
+      color:      var(--color-black);
+      box-shadow: var(--shadow-md);
+    }
+    /* Inverted (used on dark backgrounds) */
+    .btn-invert {
+      background: var(--color-white);
+      color:      var(--color-black);
+      box-shadow: var(--shadow-invert-md);
+    }
+    .btn-invert:hover {
+      transform: translate(6px, 6px);
+      box-shadow: none !important;
+    }
+
+    /* Icon-only button */
+    .btn-icon {
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      font-size: var(--text-lg);
+    }
+
+
+    /* ── 4b. BADGES / TAGS ── */
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      padding: var(--space-1) var(--space-3);
+      border: var(--border-sm);
+      white-space: nowrap;
+    }
+    .badge-solid   { background: var(--color-black); color: var(--color-white); border-color: var(--color-black); }
+    .badge-outline { background: transparent; color: var(--color-black); border-color: var(--color-black); box-shadow: var(--shadow-sm); }
+    .badge-cream   { background: var(--color-cream); color: var(--color-black); border-color: var(--color-black); box-shadow: var(--shadow-sm); }
+    .badge-invert  { background: var(--color-white); color: var(--color-black); border-color: var(--color-white); }
+
+
+    /* ── 4c. CARDS ── */
+
+    .card {
+      border: var(--border);
+      background: var(--color-white);
+      padding: var(--space-10);
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition-base), color var(--transition-base);
+    }
+    .card-shadow     { box-shadow: var(--shadow-md); }
+    .card-shadow-lg  { box-shadow: var(--shadow-lg); }
+    .card-cream      { background: var(--color-cream); }
+
+    /* Invertible card — used in services grid */
+    .card-invertible:hover {
+      background: var(--color-black);
+      color:      var(--color-white);
+    }
+    .card-invertible:hover .badge-solid {
+      background: var(--color-white);
+      color:      var(--color-black);
+      border-color: var(--color-black);
+    }
+    .card-invertible:hover .card-body-text {
+      color: rgba(255,255,255,0.7);
+    }
+
+
+    /* ── 4d. INPUTS & FORM ELEMENTS ── */
+
+    .input {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-black);
+      background: var(--color-white);
+      border: var(--border);
+      padding: var(--space-3) var(--space-4);
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+    }
+    .input::placeholder {
+      color: var(--color-gray-500);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+    }
+    .input:focus {
+      box-shadow: var(--shadow-md);
+      transform: translate(-2px, -2px);
+    }
+
+    .textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230a0a0a' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-4) center;
+      padding-right: var(--space-10);
+    }
+
+    .label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+
+    .checkbox-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      cursor: pointer;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: var(--border);
+      background: var(--color-white);
+      appearance: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .checkbox:checked {
+      background: var(--color-black);
+    }
+    .checkbox:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px; top: 1px;
+      width: 8px; height: 12px;
+      border: 2.5px solid var(--color-white);
+      border-top: none;
+      border-left: none;
+      transform: rotate(40deg);
+    }
+
+
+    /* ── 4e. NAVIGATION ── */
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) var(--container-pad);
+      border-bottom: var(--border);
+      background: var(--color-white);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-overlay);
+    }
+
+    .nav-logo-mark {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      text-decoration: none;
+      color: var(--color-black);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      background: var(--color-black);
+      border-radius: var(--radius-full);
+      margin-left: 3px;
+      vertical-align: middle;
+      margin-bottom: 6px;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: var(--space-10);
+      list-style: none;
+    }
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--color-black);
+      transition: opacity var(--transition-base);
+    }
+    .nav-link:hover { opacity: 0.45; }
+
+    .nav-link-active {
+      border-bottom: var(--border-sm);
+      padding-bottom: 2px;
+    }
+
+
+    /* ── 4f. TICKER / MARQUEE ── */
+
+    .ticker {
+      background: var(--color-black);
+      color: var(--color-white);
+      border-bottom: var(--border);
+      overflow: hidden;
+      padding: var(--space-3) 0;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex;
+      animation: ticker-scroll 22s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      letter-spacing: var(--tracking-wider);
+      padding: 0 var(--space-10);
+    }
+    .ticker-divider {
+      color: var(--color-gray-500);
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* Reverse variant */
+    .ticker-reverse .ticker-track {
+      animation-direction: reverse;
+    }
+
+    /* White ticker on light bg */
+    .ticker-light {
+      background: var(--color-cream);
+      color: var(--color-black);
+      border-color: var(--color-black);
+    }
+
+
+    /* ── 4g. SECTION HEADER ── */
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-5);
+      padding: var(--space-12) var(--container-pad) var(--space-8);
+      border-bottom: var(--border);
+    }
+    .section-number {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      color: var(--color-gray-500);
+      letter-spacing: var(--tracking-wide);
+    }
+    .section-title-text {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      letter-spacing: 0.02em;
+    }
+    .section-rule {
+      flex: 1;
+      height: var(--border-width);
+      background: var(--color-black);
+    }
+
+
+    /* ── 4h. STAT BLOCK ── */
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+    }
+
+
+    /* ── 4i. DIVIDER ── */
+
+    .divider {
+      width: 100%;
+      height: var(--border-width);
+      background: var(--color-black);
+      border: none;
+    }
+    .divider-sm {
+      height: var(--border-width-sm);
+    }
+
+
+    /* ── 4j. AVATAR ── */
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      background: var(--color-black);
+      border: var(--border-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--color-white);
+      flex-shrink: 0;
+    }
+    .avatar-lg {
+      width: 72px;
+      height: 72px;
+      font-size: var(--text-3xl);
+    }
+    .avatar-sm {
+      width: 36px;
+      height: 36px;
+      font-size: var(--text-base);
+    }
+
+
+    /* ── 4k. PROCESS STEP ── */
+
+    .step {
+      padding: var(--space-10);
+      border-right: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .step:last-child { border-right: none; }
+    .step-ghost-num {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      line-height: 1;
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-5);
+      -webkit-text-stroke: 2px var(--color-gray-300);
+      color: transparent;
+      pointer-events: none;
+    }
+    .step-dot {
+      width: 12px; height: 12px;
+      background: var(--color-black);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-3);
+      position: relative;
+      z-index: 1;
+    }
+    .step-body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: var(--leading-normal);
+      color: var(--color-gray-700);
+    }
+
+
+    /* ── 4l. SPINNING BADGE ── */
+
+    .spin-badge {
+      width: 110px; height: 110px;
+      border: var(--border);
+      border-radius: var(--radius-full);
+      background: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: var(--shadow-md);
+      flex-shrink: 0;
+    }
+    .spin-badge-ring {
+      animation: spin-cw 14s linear infinite;
+    }
+    .spin-badge-center {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      animation: spin-ccw 14s linear infinite;
+    }
+    @keyframes spin-cw  { to { transform: rotate( 360deg); } }
+    @keyframes spin-ccw { to { transform: rotate(-360deg); } }
+
+
+    /* ── 4m. PRICING CARD ── */
+
+    .price-card {
+      border: var(--border);
+      background: var(--color-white);
+      box-shadow: var(--shadow-lg);
+      padding: var(--space-10);
+      position: relative;
+    }
+    .price-card-featured {
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+    .price-amount {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      line-height: 1;
+    }
+    .price-period {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      opacity: 0.6;
+      margin-left: var(--space-1);
+    }
+    .price-feature-list {
+      list-style: none;
+      margin: var(--space-6) 0;
+    }
+    .price-feature-list li {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+    }
+    .price-card-featured .price-feature-list li {
+      border-bottom-color: rgba(255,255,255,0.12);
+    }
+    .price-feature-list li::before { content: '—'; font-family: var(--font-mono); opacity: 0.5; }
+
+
+    /* ── 4n. TOAST / NOTIFICATION ── */
+
+    .toast {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      background: var(--color-black);
+      color: var(--color-white);
+      border: var(--border);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-3) var(--space-5);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+    }
+    .toast-icon { font-size: var(--text-base); }
+    .toast-light {
+      background: var(--color-white);
+      color: var(--color-black);
+    }
+
+
+    /* ── 4o. PROGRESS / STEP INDICATOR ── */
+
+    .progress-bar-wrap {
+      border: var(--border);
+      background: var(--color-cream);
+      height: 16px;
+      width: 100%;
+      box-shadow: var(--shadow-sm);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--color-black);
+      transition: width 0.4s ease;
+    }
+
+
+    /* ────────────────────────────────────────────────────────────
+       5. LAYOUT PRIMITIVES
+    ──────────────────────────────────────────────────────────── */
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+    }
+
+    /* Grid with neubrutalism borders (no gap, borders between cells) */
+    .nb-grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
+    .nb-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .nb-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .nb-grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; }
+
+    /* Cell borders */
+    .nb-cell-right  { border-right: var(--border); }
+    .nb-cell-bottom { border-bottom: var(--border); }
+    .nb-cell-pad    { padding: var(--space-10); }
+
+    /* Stack */
+    .stack     { display: flex; flex-direction: column; }
+    .stack-2   { gap: var(--space-2);  }
+    .stack-4   { gap: var(--space-4);  }
+    .stack-6   { gap: var(--space-6);  }
+    .stack-8   { gap: var(--space-8);  }
+    .stack-12  { gap: var(--space-12); }
+
+    /* Inline cluster */
+    .cluster   { display: flex; flex-wrap: wrap; align-items: center; }
+    .cluster-2 { gap: var(--space-2); }
+    .cluster-4 { gap: var(--space-4); }
+    .cluster-6 { gap: var(--space-6); }
+
+
+    /* ────────────────────────────────────────────────────────────
+       6. UTILITY CLASSES
+    ──────────────────────────────────────────────────────────── */
+
+    /* Colors */
+    .bg-black   { background: var(--color-black); }
+    .bg-white   { background: var(--color-white); }
+    .bg-cream   { background: var(--color-cream); }
+    .text-black { color: var(--color-black); }
+    .text-white { color: var(--color-white); }
+    .text-muted { color: var(--color-gray-500); }
+
+    /* Borders */
+    .border        { border: var(--border); }
+    .border-top    { border-top: var(--border); }
+    .border-bottom { border-bottom: var(--border); }
+    .border-left   { border-left: var(--border); }
+    .border-right  { border-right: var(--border); }
+
+    /* Shadows */
+    .shadow-sm { box-shadow: var(--shadow-sm); }
+    .shadow-md { box-shadow: var(--shadow-md); }
+    .shadow-lg { box-shadow: var(--shadow-lg); }
+    .shadow-xl { box-shadow: var(--shadow-xl); }
+
+    /* Hover shadow shift (add to any shadowed element) */
+    .shadow-shift {
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .shadow-shift:hover {
+      transform: translate(6px, 6px);
+      box-shadow: none !important;
+    }
+
+    /* Text transforms */
+    .uppercase    { text-transform: uppercase; }
+    .tracking-wide    { letter-spacing: var(--tracking-wider); }
+    .tracking-widest  { letter-spacing: var(--tracking-widest); }
+
+    /* Display/visibility */
+    .hidden  { display: none; }
+    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+    /* Overflow */
+    .overflow-hidden { overflow: hidden; }
+
+    /* Cursor */
+    .cursor-none { cursor: none; }
+
+
+    /* ────────────────────────────────────────────────────────────
+      7. ANIMATION CLASSES
+    ──────────────────────────────────────────────────────────── */
+
+    /* Float — for hero illustrations */
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(-3deg); }
+      50%      { transform: translateY(-18px) rotate(-3deg); }
+    }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+
+    /* Scroll reveal — toggle with JS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delay helpers */
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    /* Pulse */
+    @keyframes pulse-border {
+      0%,100% { box-shadow: var(--shadow-md); }
+      50%      { box-shadow: var(--shadow-xl); }
+    }
+    .animate-pulse-border { animation: pulse-border 2s ease-in-out infinite; }
+
+
+    /* ────────────────────────────────────────────────────────────
+       8. GRAIN TEXTURE OVERLAY (applied via pseudo-element)
+         Add class .grain to any element to get texture overlay.
+    ──────────────────────────────────────────────────────────── */
+
+    .grain { position: relative; }
+    .grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+    }
+
+
+    /* ============================================================
+       DESIGN SYSTEM DOCS PAGE STYLES
+       (Everything below is only for rendering this HTML document)
+    ============================================================ */
+
+    .ds-page {
+      background: var(--color-white);
+    }
+    .ds-topbar {
+      background: var(--color-black);
+      color: var(--color-white);
+      padding: 1rem var(--container-pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .ds-topbar-logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+    .ds-topbar-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      opacity: 0.5;
+    }
+    .ds-version {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.25rem 0.7rem;
+    }
+
+    .ds-sidebar {
+      position: fixed;
+      left: 0; top: 60px; bottom: 0;
+      width: 220px;
+      border-right: var(--border);
+      background: var(--color-white);
+      overflow-y: auto;
+      z-index: 100;
+      padding: var(--space-6) 0;
+    }
+    .ds-sidebar-item {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--color-gray-700);
+      padding: var(--space-2) var(--space-6);
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+    .ds-sidebar-item:hover { background: var(--color-cream); color: var(--color-black); }
+    .ds-sidebar-group {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      padding: var(--space-5) var(--space-6) var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .ds-main {
+      margin-left: 220px;
+      min-height: 100vh;
+    }
+
+    .ds-section {
+      border-bottom: var(--border);
+      padding: var(--space-12) var(--container-pad);
+    }
+    .ds-section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      letter-spacing: 0.02em;
+      margin-bottom: var(--space-2);
+    }
+    .ds-section-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      color: var(--color-gray-700);
+      margin-bottom: var(--space-10);
+      max-width: 60ch;
+    }
+
+    .ds-subsection-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-3);
+      border-bottom: var(--border-sm);
+    }
+
+    .ds-token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-10);
+    }
+
+    .ds-token {
+      border: var(--border);
+      overflow: hidden;
+    }
+    .ds-token-swatch {
+      height: 80px;
+    }
+    .ds-token-info {
+      padding: var(--space-3) var(--space-4);
+      border-top: var(--border-sm);
+    }
+    .ds-token-name {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      margin-bottom: 2px;
+    }
+    .ds-token-value {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      color: var(--color-gray-500);
+    }
+
+    .ds-type-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-6);
+      padding: var(--space-5) 0;
+      border-bottom: 1px solid var(--color-cream-dark);
+    }
+    .ds-type-meta {
+      width: 220px;
+      flex-shrink: 0;
+    }
+    .ds-type-meta-name {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-wide);
+    }
+    .ds-type-meta-detail {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      color: var(--color-gray-500);
+      margin-top: 3px;
+    }
+
+    .ds-spacing-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-cream-dark);
+    }
+    .ds-spacing-bar {
+      background: var(--color-black);
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .ds-spacing-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+    }
+    .ds-spacing-name { font-weight: var(--weight-bold); }
+    .ds-spacing-val  { color: var(--color-gray-500); margin-left: var(--space-3); }
+
+    .ds-shadow-demo {
+      width: 80px; height: 80px;
+      background: var(--color-white);
+      border: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-align: center;
+    }
+
+    .ds-component-box {
+      border: var(--border);
+      padding: var(--space-8);
+      background: var(--color-cream);
+      margin-bottom: var(--space-6);
+    }
+    .ds-component-dark {
+      background: var(--color-black);
+    }
+    .ds-component-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      margin-top: var(--space-2);
+      text-align: center;
+    }
+
+    .ds-code {
+      background: var(--color-black);
+      color: #a8ff78;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      padding: var(--space-5) var(--space-6);
+      border: var(--border);
+      overflow-x: auto;
+      margin-top: var(--space-4);
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+    .ds-code .cm { color: #666; }
+    .ds-code .kw { color: #fff; }
+    .ds-code .vr { color: #f0c040; }
+    .ds-code .vl { color: #a8ff78; }
+
+    .ds-flex-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-5);
+      align-items: flex-start;
+      margin-bottom: var(--space-4);
+    }
+
+    @media (max-width: 768px) {
+      .ds-sidebar { display: none; }
+      .ds-main { margin-left: 0; }
+    }
+  </style>
+</head>
+<body class="ds-page grain">
+
+<!-- TOP BAR -->
+<div class="ds-topbar">
+  <div class="ds-flex-row" style="gap: 1rem; margin:0; align-items:center;">
+    <span class="ds-topbar-logo">SOLE<span style="display:inline-block;width:8px;height:8px;background:#fff;border-radius:50%;margin-left:3px;vertical-align:middle;margin-bottom:5px;"></span></span>
+    <span class="ds-topbar-label">Design System</span>
+  </div>
+  <span class="ds-version">v1.0.0</span>
+</div>
+
+<!-- SIDEBAR -->
+<nav class="ds-sidebar">
+  <span class="ds-sidebar-group">Foundations</span>
+  <a href="#colors"     class="ds-sidebar-item">Color Palette</a>
+  <a href="#typography" class="ds-sidebar-item">Typography</a>
+  <a href="#spacing"    class="ds-sidebar-item">Spacing</a>
+  <a href="#borders"    class="ds-sidebar-item">Borders & Shadows</a>
+  <span class="ds-sidebar-group">Components</span>
+  <a href="#buttons"    class="ds-sidebar-item">Buttons</a>
+  <a href="#badges"     class="ds-sidebar-item">Badges & Tags</a>
+  <a href="#cards"      class="ds-sidebar-item">Cards</a>
+  <a href="#forms"      class="ds-sidebar-item">Form Elements</a>
+  <a href="#nav"        class="ds-sidebar-item">Navigation</a>
+  <a href="#ticker"     class="ds-sidebar-item">Ticker / Marquee</a>
+  <a href="#stats"      class="ds-sidebar-item">Stats & Figures</a>
+  <a href="#process"    class="ds-sidebar-item">Process Steps</a>
+  <a href="#pricing"    class="ds-sidebar-item">Pricing Cards</a>
+  <a href="#misc"       class="ds-sidebar-item">Misc Components</a>
+  <span class="ds-sidebar-group">Utilities</span>
+  <a href="#layout"     class="ds-sidebar-item">Layout</a>
+  <a href="#animation"  class="ds-sidebar-item">Animations</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="ds-main">
+
+  <!-- INTRO -->
+  <div class="ds-section" style="background: var(--color-black); color: var(--color-white);">
+    <div style="max-width: 800px;">
+      <p class="type-label" style="color: var(--color-gray-500); margin-bottom: var(--space-4);">SOLE. Brand — Design System</p>
+      <h1 class="type-display-xl" style="line-height: 0.88; margin-bottom: var(--space-8);">
+        DESIGN<br>
+        <span class="type-outline-white">SYSTEM</span>
+      </h1>
+      <p class="type-body-lg" style="color: var(--color-gray-500); max-width: 55ch; line-height: var(--leading-loose);">
+        A complete visual language for SOLE. shoe cleaning service. Built on neubrutalism principles: raw borders, hard shadows, monochromatic palette, and typographic tension. Every token, component, and utility lives in this single file.
+      </p>
+      <div class="ds-flex-row" style="margin-top: var(--space-8); margin-bottom: 0;">
+        <div class="stat">
+          <span class="stat-value" style="color:white;">3</span>
+          <span class="stat-label">Font Roles</span>
+        </div>
+        <div style="width:3px; background: rgba(255,255,255,0.15); align-self: stretch;"></div>
+        <div class="stat">
+          <span class="stat-value" style="color:white;">15+</span>
+          <span class="stat-label">Components</span>
+        </div>
+        <div style="width:3px; background: rgba(255,255,255,0.15); align-self: stretch;"></div>
+        <div class="stat">
+          <span class="stat-value" style="color:white;">60+</span>
+          <span class="stat-label">CSS Tokens</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COLORS ── -->
+  <section class="ds-section" id="colors">
+    <h2 class="ds-section-title">Color Palette</h2>
+    <p class="ds-section-desc">Strictly monochromatic. Two warm off-whites create depth without breaking the B&W brand rule. Zero hue is introduced.</p>
+
+    <div class="ds-subsection-title">Core Colors</div>
+    <div class="ds-token-grid">
+      <div class="ds-token">
+        <div class="ds-token-swatch" style="background: var(--color-black);"></div>
+        <div class="ds-token-info">
+          <div class="ds-token-name">--color-black</div>
+          <div class="ds-token-value">#0a0a0a · Primary</div>
+        </div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-swatch" style="background: var(--color-white); border-bottom: 1px solid #ddd;"></div>
+        <div class="ds-token-info">
+          <div class="ds-token-name">--color-white</div>
+          <div class="ds-token-value">#f5f2ee · Background</div>
+        </div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-swatch" style="background: var(--color-cream);"></div>
+        <div class="ds-token-info">
+          <div class="ds-token-name">--color-cream</div>
+          <div class="ds-token-value">#e8e4dc · Surface</div>
+        </div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-swatch" style="background: var(--color-cream-dark);"></div>
+        <div class="ds-token-info">
+          <div class="ds-token-name">--color-cream-dark</div>
+          <div class="ds-token-value">#d8d4cc · Hover surface</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Gray Scale</div>
+    <div class="ds-token-grid">
+      <div class="ds-token"><div class="ds-token-swatch" style="background:#f0ede8;"></div><div class="ds-token-info"><div class="ds-token-name">--color-gray-100</div><div class="ds-token-value">#f0ede8</div></div></div>
+      <div class="ds-token"><div class="ds-token-swatch" style="background:#cccccc;"></div><div class="ds-token-info"><div class="ds-token-name">--color-gray-300</div><div class="ds-token-value">#cccccc</div></div></div>
+      <div class="ds-token"><div class="ds-token-swatch" style="background:#888888;"></div><div class="ds-token-info"><div class="ds-token-name">--color-gray-500</div><div class="ds-token-value">#888888</div></div></div>
+      <div class="ds-token"><div class="ds-token-swatch" style="background:#444444;"></div><div class="ds-token-info"><div class="ds-token-name">--color-gray-700</div><div class="ds-token-value">#444444</div></div></div>
+      <div class="ds-token"><div class="ds-token-swatch" style="background:#1a1a1a;"></div><div class="ds-token-info"><div class="ds-token-name">--color-gray-900</div><div class="ds-token-value">#1a1a1a</div></div></div>
+    </div>
+
+    <div class="ds-code">
+<span class="cm">/* ── Color Usage Rules ───────────────────────────────────────── */</span>
+<span class="cm">/* Primary text, borders, filled buttons   →  </span><span class="vl">var(--color-black)</span><span class="cm">  */</span>
+<span class="cm">/* Page background                          →  </span><span class="vl">var(--color-white)</span><span class="cm">  */</span>
+<span class="cm">/* Alternating surfaces, cards              →  </span><span class="vl">var(--color-cream)</span><span class="cm">  */</span>
+<span class="cm">/* Secondary / metadata text               →  </span><span class="vl">var(--color-gray-500)</span><span class="cm"> */</span>
+<span class="cm">/* Body copy on white                       →  </span><span class="vl">var(--color-gray-700)</span><span class="cm"> */</span>
+<span class="cm">/* NEVER introduce hue — no blues, reds, greens. */</span></div>
+  </section>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <section class="ds-section" id="typography">
+    <h2 class="ds-section-title">Typography</h2>
+    <p class="ds-section-desc">Three font roles. Each tightly scoped. Font substitution between roles breaks the system.</p>
+
+    <div class="ds-subsection-title">Font Roles</div>
+    <div class="nb-grid-3" style="margin-bottom: var(--space-10);">
+      <div class="nb-cell-right nb-cell-bottom nb-cell-pad">
+        <p class="type-label-sm" style="color: var(--color-gray-500);">Display — --font-display</p>
+        <p style="font-family: var(--font-display); font-size: 3.5rem; line-height: 1; margin-top: var(--space-4);">Bebas Neue</p>
+        <p class="type-body-sm text-muted" style="margin-top: var(--space-4);">Hero titles · Section headings · Price tags · Stats · Process numbers</p>
+      </div>
+      <div class="nb-cell-right nb-cell-bottom nb-cell-pad">
+        <p class="type-label-sm" style="color: var(--color-gray-500);">Mono — --font-mono</p>
+        <p style="font-family: var(--font-mono); font-size: 1.4rem; line-height: 1.3; margin-top: var(--space-4);">Space Mono</p>
+        <p class="type-body-sm text-muted" style="margin-top: var(--space-4);">Labels · Tags · Navigation · Meta · Captions · Code</p>
+      </div>
+      <div class="nb-cell-bottom nb-cell-pad">
+        <p class="type-label-sm" style="color: var(--color-gray-500);">Body — --font-body</p>
+        <p style="font-family: var(--font-body); font-size: 1.8rem; font-weight: 700; line-height: 1.2; margin-top: var(--space-4);">Barlow Condensed</p>
+        <p class="type-body-sm text-muted" style="margin-top: var(--space-4);">Descriptions · CTAs · Lead copy · Feature lists</p>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Type Scale — Display (Bebas Neue)</div>
+    <div class="ds-type-row">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-display-hero</span><span class="ds-type-meta-detail">clamp(5rem, 11vw, 10rem) · lh 0.9</span></div>
+      <span style="font-family:var(--font-display); font-size: clamp(3rem,6vw,5rem); line-height:0.9;">Hero Title</span>
+    </div>
+    <div class="ds-type-row">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-display-xl</span><span class="ds-type-meta-detail">5rem · lh 0.9</span></div>
+      <span class="type-display-xl">Section XL</span>
+    </div>
+    <div class="ds-type-row">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-display-lg</span><span class="ds-type-meta-detail">3.5rem · lh 1.1</span></div>
+      <span class="type-display-lg">Display Large</span>
+    </div>
+    <div class="ds-type-row">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-display-md</span><span class="ds-type-meta-detail">2.8rem · lh 1.3</span></div>
+      <span class="type-display-md">Display Medium</span>
+    </div>
+    <div class="ds-type-row" style="margin-bottom: var(--space-10);">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-display-sm</span><span class="ds-type-meta-detail">2rem · lh 1.3</span></div>
+      <span class="type-display-sm">Display Small</span>
+    </div>
+
+    <div class="ds-subsection-title">Outlined Text Variants</div>
+    <div class="ds-flex-row" style="margin-bottom: var(--space-10); align-items: center; gap: var(--space-8);">
+      <span class="type-display-lg type-outline">OUTLINE</span>
+      <div style="background: var(--color-black); padding: var(--space-4) var(--space-6);">
+        <span class="type-display-lg type-outline-white">OUTLINE</span>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Type Scale — Body (Barlow Condensed)</div>
+    <div class="ds-type-row">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-body-lg</span><span class="ds-type-meta-detail">1.15rem · lh 1.6</span></div>
+      <span class="type-body-lg">Professional shoe cleaning and restoration. We make your kicks look better than the day you bought them.</span>
+    </div>
+    <div class="ds-type-row" style="margin-bottom: var(--space-10);">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-body-base</span><span class="ds-type-meta-detail">1rem · lh 1.6</span></div>
+      <span class="type-body-base">Full breakdown clean — uppers, midsole, outsole, insoles, and laces. Removes dirt, grime, and yellowing.</span>
+    </div>
+
+    <div class="ds-subsection-title">Labels & Mono (Space Mono)</div>
+    <div class="ds-type-row">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-label</span><span class="ds-type-meta-detail">0.72rem · bold · 0.25em track</span></div>
+      <span class="type-label">Most Popular Service</span>
+    </div>
+    <div class="ds-type-row">
+      <div class="ds-type-meta"><span class="ds-type-meta-name">.type-label-sm</span><span class="ds-type-meta-detail">0.625rem · 0.25em track</span></div>
+      <span class="type-label-sm">Est. 2019 · Premium Clean</span>
+    </div>
+  </section>
+
+  <!-- ── SPACING ── -->
+  <section class="ds-section" id="spacing">
+    <h2 class="ds-section-title">Spacing Scale</h2>
+    <p class="ds-section-desc">4px base unit. 10 stops. Always reference a token — never hardcode pixel values.</p>
+    <div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:4px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-1</span><span class="ds-spacing-val">0.25rem / 4px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:8px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-2</span><span class="ds-spacing-val">0.5rem / 8px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:12px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-3</span><span class="ds-spacing-val">0.75rem / 12px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:16px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-4</span><span class="ds-spacing-val">1rem / 16px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:24px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-6</span><span class="ds-spacing-val">1.5rem / 24px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:32px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-8</span><span class="ds-spacing-val">2rem / 32px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:40px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-10</span><span class="ds-spacing-val">2.5rem / 40px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:48px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-12</span><span class="ds-spacing-val">3rem / 48px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:64px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-16</span><span class="ds-spacing-val">4rem / 64px</span></span></div>
+      <div class="ds-spacing-row"><div class="ds-spacing-bar" style="width:80px;"></div><span class="ds-spacing-meta"><span class="ds-spacing-name">--space-20</span><span class="ds-spacing-val">5rem / 80px</span></span></div>
+    </div>
+  </section>
+
+  <!-- ── BORDERS & SHADOWS ── -->
+  <section class="ds-section" id="borders">
+    <h2 class="ds-section-title">Borders & Shadows</h2>
+    <p class="ds-section-desc">The defining visual trait of neubrutalism. Hard offset shadows — zero blur, ever. Consistent 3px border weight.</p>
+
+    <div class="ds-subsection-title">Borders</div>
+    <div class="ds-flex-row" style="margin-bottom: var(--space-10);">
+      <div>
+        <div style="width:200px; height:60px; border: var(--border); display:flex; align-items:center; justify-content:center;">
+          <span class="type-label-sm">--border (3px)</span>
+        </div>
+        <div class="ds-component-label">Default</div>
+      </div>
+      <div>
+        <div style="width:200px; height:60px; border: var(--border-sm); display:flex; align-items:center; justify-content:center;">
+          <span class="type-label-sm">--border-sm (2px)</span>
+        </div>
+        <div class="ds-component-label">Small</div>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Hard Offset Shadows</div>
+    <div class="ds-flex-row" style="gap: var(--space-10); margin-bottom: var(--space-10); flex-wrap: wrap;">
+      <div class="stack stack-2" style="align-items:center;">
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-xs);">XS</div>
+        <span class="type-label-sm text-muted">2px 2px</span>
+      </div>
+      <div class="stack stack-2" style="align-items:center;">
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-sm);">SM</div>
+        <span class="type-label-sm text-muted">3px 3px</span>
+      </div>
+      <div class="stack stack-2" style="align-items:center;">
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-md);">MD</div>
+        <span class="type-label-sm text-muted">6px 6px</span>
+      </div>
+      <div class="stack stack-2" style="align-items:center;">
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-lg);">LG</div>
+        <span class="type-label-sm text-muted">10px 10px</span>
+      </div>
+      <div class="stack stack-2" style="align-items:center;">
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-xl);">XL</div>
+        <span class="type-label-sm text-muted">14px 14px</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BUTTONS ── -->
+  <section class="ds-section" id="buttons">
+    <h2 class="ds-section-title">Buttons</h2>
+    <p class="ds-section-desc">All buttons share the hard-shift hover mechanic: translate(6px,6px) + shadow collapse. Available in 4 variants × 4 sizes.</p>
+
+    <div class="ds-subsection-title">Variants</div>
+    <div class="ds-component-box">
+      <div class="ds-flex-row">
+        <a href="#" class="btn btn-primary btn-lg">Primary</a>
+        <a href="#" class="btn btn-ghost btn-lg">Ghost</a>
+        <a href="#" class="btn btn-cream btn-lg">Cream</a>
+      </div>
+    </div>
+    <div class="ds-component-box ds-component-dark">
+      <div class="ds-flex-row">
+        <a href="#" class="btn btn-invert btn-lg">Invert</a>
+        <a href="#" class="btn btn-ghost btn-lg" style="color:white; border-color:white; box-shadow: var(--shadow-invert-md);">Ghost Dark</a>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Sizes</div>
+    <div class="ds-component-box">
+      <div class="ds-flex-row" style="align-items:center;">
+        <a href="#" class="btn btn-primary btn-sm">Small</a>
+        <a href="#" class="btn btn-primary btn-md">Medium</a>
+        <a href="#" class="btn btn-primary btn-lg">Large</a>
+        <a href="#" class="btn btn-primary btn-xl">X-Large</a>
+      </div>
+    </div>
+
+    <div class="ds-code">
+<span class="cm">/* Usage */</span>
+&lt;a href="#" class="<span class="vl">btn btn-primary btn-lg</span>"&gt;Book a Clean&lt;/a&gt;
+&lt;a href="#" class="<span class="vl">btn btn-ghost btn-md</span>"&gt;View Services&lt;/a&gt;
+&lt;button class="<span class="vl">btn btn-cream btn-sm</span>"&gt;Learn More&lt;/button&gt;
+
+<span class="cm">/* Sizes: btn-sm  btn-md  btn-lg  btn-xl          */</span>
+<span class="cm">/* Variants: btn-primary  btn-ghost  btn-cream  btn-invert */</span></div>
+  </section>
+
+  <!-- ── BADGES ── -->
+  <section class="ds-section" id="badges">
+    <h2 class="ds-section-title">Badges & Tags</h2>
+    <p class="ds-section-desc">Used for service labels, category tags, and status indicators. Always Space Mono, always uppercase.</p>
+
+    <div class="ds-component-box">
+      <div class="ds-flex-row">
+        <span class="badge badge-solid">Most Popular</span>
+        <span class="badge badge-outline">Premium</span>
+        <span class="badge badge-cream">Add-on</span>
+      </div>
+    </div>
+    <div class="ds-component-box ds-component-dark">
+      <div class="ds-flex-row">
+        <span class="badge badge-invert">Featured</span>
+      </div>
+    </div>
+
+    <div class="ds-code">
+&lt;span class="<span class="vl">badge badge-solid</span>"&gt;Most Popular&lt;/span&gt;
+&lt;span class="<span class="vl">badge badge-outline</span>"&gt;Premium&lt;/span&gt;
+&lt;span class="<span class="vl">badge badge-cream</span>"&gt;Add-on&lt;/span&gt;
+&lt;span class="<span class="vl">badge badge-invert</span>"&gt;Featured&lt;/span&gt;</div>
+  </section>
+
+  <!-- ── CARDS ── -->
+  <section class="ds-section" id="cards">
+    <h2 class="ds-section-title">Cards</h2>
+    <p class="ds-section-desc">Base card with surface variants and the invertible hover pattern used in the services grid.</p>
+
+    <div class="ds-subsection-title">Surface Variants</div>
+    <div class="nb-grid-3" style="margin-bottom: var(--space-6);">
+      <div class="card nb-cell-right">
+        <span class="badge badge-solid" style="margin-bottom: var(--space-4);">Standard</span>
+        <p class="type-display-sm" style="margin-bottom: var(--space-3);">Sneaker Clean</p>
+        <p class="type-body-base card-body-text text-muted">Full breakdown — uppers, midsole, outsole, laces.</p>
+        <p class="type-display-md" style="margin-top: var(--space-6);">₱299 <span class="type-label-sm text-muted">/ pair</span></p>
+      </div>
+      <div class="card card-cream nb-cell-right">
+        <span class="badge badge-solid" style="margin-bottom: var(--space-4);">Cream Surface</span>
+        <p class="type-display-sm" style="margin-bottom: var(--space-3);">Leather Restore</p>
+        <p class="type-body-base card-body-text text-muted">Conditioning, colour refresh, crack repair, coating.</p>
+        <p class="type-display-md" style="margin-top: var(--space-6);">₱499 <span class="type-label-sm text-muted">/ pair</span></p>
+      </div>
+      <div class="card card-invertible" style="cursor:pointer;">
+        <span class="badge badge-solid" style="margin-bottom: var(--space-4);">Hover me ↗</span>
+        <p class="type-display-sm" style="margin-bottom: var(--space-3);">Protect & Shield</p>
+        <p class="type-body-base card-body-text text-muted">Stain repellent coating. Lasts months.</p>
+        <p class="type-display-md" style="margin-top: var(--space-6);">₱149 <span class="type-label-sm text-muted">/ pair</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FORMS ── -->
+  <section class="ds-section" id="forms">
+    <h2 class="ds-section-title">Form Elements</h2>
+    <p class="ds-section-desc">Hard border inputs that lift (translate) on focus. Checkboxes follow the same solid black fill pattern.</p>
+
+    <div class="ds-component-box" style="max-width: 560px;">
+      <div class="stack stack-6">
+        <div>
+          <label class="label">Your Name</label>
+          <input class="input" type="text" placeholder="Full name" />
+        </div>
+        <div>
+          <label class="label">Service Type</label>
+          <select class="input select">
+            <option>Sneaker Deep Clean</option>
+            <option>Leather Restoration</option>
+            <option>Protect & Shield</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">Notes</label>
+          <textarea class="input textarea" placeholder="Any special instructions..."></textarea>
+        </div>
+        <label class="checkbox-wrap">
+          <input class="checkbox" type="checkbox" checked />
+          <span class="type-body-base">Add protective coating (+₱149)</span>
+        </label>
+        <button class="btn btn-primary btn-lg" style="width:100%;">Book a Clean</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NAV ── -->
+  <section class="ds-section" id="nav">
+    <h2 class="ds-section-title">Navigation</h2>
+    <p class="ds-section-desc">Sticky nav with logo mark (dot-accent), text links, and a CTA button variant.</p>
+
+    <div class="ds-component-box" style="padding: 0; overflow: hidden;">
+      <nav class="nav" style="position: static;">
+        <a href="#" class="nav-logo-mark">SOLE<span class="nav-logo-dot"></span></a>
+        <ul class="nav-list">
+          <li><a href="#" class="nav-link nav-link-active">Services</a></li>
+          <li><a href="#" class="nav-link">Process</a></li>
+          <li><a href="#" class="nav-link">Reviews</a></li>
+          <li><a href="#" class="btn btn-primary btn-sm">Book Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ── TICKER ── -->
+  <section class="ds-section" id="ticker">
+    <h2 class="ds-section-title">Ticker / Marquee</h2>
+    <p class="ds-section-desc">Infinite horizontal scroll. Dark and light variants. Hover to pause.</p>
+
+    <div style="border: var(--border); margin-bottom: var(--space-4); overflow: hidden;">
+      <div class="ticker" style="border:none;">
+        <div class="ticker-track">
+          <span class="ticker-item">CLEAN SOLES <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">FRESH KICKS <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">RESTORE. REVIVE. REPEAT <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">PREMIUM CARE <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">EST. 2019 <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">CLEAN SOLES <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">FRESH KICKS <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">RESTORE. REVIVE. REPEAT <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">PREMIUM CARE <span class="ticker-divider">✦</span></span>
+          <span class="ticker-item">EST. 2019 <span class="ticker-divider">✦</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border: var(--border); overflow: hidden;">
+      <div class="ticker ticker-light" style="border:none;">
+        <div class="ticker-track ticker-reverse">
+          <span class="ticker-item">YOUR SNEAKERS DESERVE BETTER <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+          <span class="ticker-item">SOLE. STUDIO <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+          <span class="ticker-item">24HR TURNAROUND <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+          <span class="ticker-item">CALAMBA CITY <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+          <span class="ticker-item">YOUR SNEAKERS DESERVE BETTER <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+          <span class="ticker-item">SOLE. STUDIO <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+          <span class="ticker-item">24HR TURNAROUND <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+          <span class="ticker-item">CALAMBA CITY <span class="ticker-divider" style="color:var(--color-gray-500);">✦</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ── -->
+  <section class="ds-section" id="stats">
+    <h2 class="ds-section-title">Stats & Figures</h2>
+    <p class="ds-section-desc">Large Bebas Neue numbers. Mono label below. Used in hero and CTA sections.</p>
+
+    <div class="ds-component-box">
+      <div style="display:flex; gap: var(--space-12); flex-wrap: wrap; align-items: flex-start;">
+        <div class="stat">
+          <span class="stat-value">12K+</span>
+          <span class="stat-label">Pairs Cleaned</span>
+        </div>
+        <div style="width: 3px; background: var(--color-cream-dark); align-self: stretch;"></div>
+        <div class="stat">
+          <span class="stat-value">4.9★</span>
+          <span class="stat-label">Avg Rating</span>
+        </div>
+        <div style="width: 3px; background: var(--color-cream-dark); align-self: stretch;"></div>
+        <div class="stat">
+          <span class="stat-value">24hr</span>
+          <span class="stat-label">Turnaround</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROCESS STEPS ── -->
+  <section class="ds-section" id="process">
+    <h2 class="ds-section-title">Process Steps</h2>
+    <p class="ds-section-desc">Ghost-numbered background, dot indicator, bordered columns with no gap between cells.</p>
+
+    <div class="nb-grid-4" style="border: var(--border);">
+      <div class="step">
+        <span class="step-ghost-num">01</span>
+        <div class="step-dot"></div>
+        <div class="step-title">Drop Off</div>
+        <p class="step-body">Bring your shoes to our studio or schedule a pickup anywhere.</p>
+      </div>
+      <div class="step">
+        <span class="step-ghost-num">02</span>
+        <div class="step-dot"></div>
+        <div class="step-title">Inspection</div>
+        <p class="step-body">We assess condition and send a clear quote before work begins.</p>
+      </div>
+      <div class="step">
+        <span class="step-ghost-num">03</span>
+        <div class="step-dot"></div>
+        <div class="step-title">Deep Clean</div>
+        <p class="step-body">Professional tools and solutions tailored to your shoe material.</p>
+      </div>
+      <div class="step" style="border-right:none;">
+        <span class="step-ghost-num">04</span>
+        <div class="step-dot"></div>
+        <div class="step-title">Return</div>
+        <p class="step-body">Cleaned, wrapped, returned within 24 hours. Day one feeling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ── -->
+  <section class="ds-section" id="pricing">
+    <h2 class="ds-section-title">Pricing Cards</h2>
+    <p class="ds-section-desc">Feature list with dash markers. Featured card uses black inversion. CTA button adapts per surface.</p>
+
+    <div class="nb-grid-3" style="gap: var(--space-6);">
+      <div class="price-card">
+        <span class="badge badge-outline" style="margin-bottom: var(--space-5);">Basic</span>
+        <div style="margin-bottom: var(--space-6);">
+          <span class="price-amount">₱299</span>
+          <span class="price-period">/ pair</span>
+        </div>
+        <ul class="price-feature-list">
+          <li>Sneaker deep clean</li>
+          <li>Laces washed</li>
+          <li>Insole refresh</li>
+          <li>24hr turnaround</li>
+        </ul>
+        <a href="#" class="btn btn-ghost btn-lg" style="width:100%; justify-content:center;">Book Basic</a>
+      </div>
+
+      <div class="price-card price-card-featured">
+        <span class="badge badge-invert" style="margin-bottom: var(--space-5);">Most Popular</span>
+        <div style="margin-bottom: var(--space-6);">
+          <span class="price-amount">₱499</span>
+          <span class="price-period">/ pair</span>
+        </div>
+        <ul class="price-feature-list" style="color:rgba(255,255,255,0.85);">
+          <li>Leather restoration</li>
+          <li>Colour refresh</li>
+          <li>Crack repair</li>
+          <li>Protective coating</li>
+        </ul>
+        <a href="#" class="btn btn-invert btn-lg" style="width:100%; justify-content:center;">Book Premium</a>
+      </div>
+
+      <div class="price-card">
+        <span class="badge badge-outline" style="margin-bottom: var(--space-5);">Add-on</span>
+        <div style="margin-bottom: var(--space-6);">
+          <span class="price-amount">₱149</span>
+          <span class="price-period">/ pair</span>
+        </div>
+        <ul class="price-feature-list">
+          <li>Water repellent spray</li>
+          <li>Stain shield</li>
+          <li>Lasts 3+ months</li>
+          <li>Any material</li>
+        </ul>
+        <a href="#" class="btn btn-ghost btn-lg" style="width:100%; justify-content:center;">Add Shield</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MISC COMPONENTS ── -->
+  <section class="ds-section" id="misc">
+    <h2 class="ds-section-title">Misc Components</h2>
+
+    <div class="ds-subsection-title">Toast Notifications</div>
+    <div class="ds-component-box">
+      <div class="stack stack-4" style="align-items: flex-start;">
+        <div class="toast"><span class="toast-icon">✓</span>Booking confirmed — see you soon!</div>
+        <div class="toast"><span class="toast-icon">⟳</span>Processing your order...</div>
+        <div class="toast toast-light"><span class="toast-icon">★</span>Your review was submitted.</div>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Progress Bar</div>
+    <div class="ds-component-box" style="max-width: 500px;">
+      <div class="stack stack-4">
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:25%;"></div></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:60%;"></div></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:100%;"></div></div>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Avatars</div>
+    <div class="ds-component-box">
+      <div class="ds-flex-row" style="align-items:center;">
+        <div class="avatar avatar-lg">JR</div>
+        <div class="avatar">AC</div>
+        <div class="avatar avatar-sm">MG</div>
+      </div>
+    </div>
+
+    <div class="ds-subsection-title">Spinning Badge</div>
+    <div class="ds-component-box" style="display:flex; align-items:center; gap: var(--space-8);">
+      <div class="spin-badge">
+        <svg class="spin-badge-ring" viewBox="0 0 110 110" width="110" height="110" style="position:absolute;">
+          <defs><path id="sp" d="M 55,55 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"/></defs>
+          <text font-family="Space Mono, monospace" font-size="9.5" fill="#0a0a0a" letter-spacing="3">
+            <textPath href="#sp">PREMIUM CLEAN • SINCE 2019 •</textPath>
+          </text>
+        </svg>
+        <span class="spin-badge-center">✦</span>
+      </div>
+      <p class="type-body-base text-muted" style="max-width: 30ch;">SVG textPath + CSS animation. Ring spins CW, center mark spins CCW to stay upright.</p>
+    </div>
+
+    <div class="ds-subsection-title">Section Header Pattern</div>
+    <div style="border: var(--border); overflow: hidden;">
+      <div class="section-header" style="padding: var(--space-8) var(--space-8) var(--space-6);">
+        <span class="section-number">02</span>
+        <h2 class="section-title-text">How It Works</h2>
+        <div class="section-rule"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LAYOUT ── -->
+  <section class="ds-section" id="layout">
+    <h2 class="ds-section-title">Layout Primitives</h2>
+    <p class="ds-section-desc">Grid helpers use borders not gaps — the neubrutalism way. Stack and cluster handle flex flow.</p>
+
+    <div class="ds-subsection-title">nb-grid patterns</div>
+    <div class="nb-grid-3" style="border: var(--border); margin-bottom: var(--space-6);">
+      <div class="nb-cell-right nb-cell-pad" style="background: var(--color-cream);">
+        <span class="type-label-sm">Col 1</span>
+      </div>
+      <div class="nb-cell-right nb-cell-pad">
+        <span class="type-label-sm">Col 2</span>
+      </div>
+      <div class="nb-cell-pad" style="background: var(--color-cream);">
+        <span class="type-label-sm">Col 3</span>
+      </div>
+    </div>
+    <div class="nb-grid-2-1" style="border: var(--border); margin-bottom: var(--space-6);">
+      <div class="nb-cell-right nb-cell-pad" style="background: var(--color-cream);">
+        <span class="type-label-sm">2fr — Main content</span>
+      </div>
+      <div class="nb-cell-pad">
+        <span class="type-label-sm">1fr — Sidebar</span>
+      </div>
+    </div>
+
+    <div class="ds-code">
+<span class="cm">/* Grid Classes */</span>
+.nb-grid-2     <span class="cm">→</span>  <span class="vl">grid-template-columns: 1fr 1fr</span>
+.nb-grid-3     <span class="cm">→</span>  <span class="vl">repeat(3, 1fr)</span>
+.nb-grid-4     <span class="cm">→</span>  <span class="vl">repeat(4, 1fr)</span>
+.nb-grid-2-1   <span class="cm">→</span>  <span class="vl">2fr 1fr</span>
+
+<span class="cm">/* Cell helpers */</span>
+.nb-cell-right   <span class="cm">→</span>  <span class="vl">border-right: var(--border)</span>
+.nb-cell-bottom  <span class="cm">→</span>  <span class="vl">border-bottom: var(--border)</span>
+.nb-cell-pad     <span class="cm">→</span>  <span class="vl">padding: var(--space-10)</span></div>
+  </section>
+
+  <!-- ── ANIMATION ── -->
+  <section class="ds-section" id="animation">
+    <h2 class="ds-section-title">Animations</h2>
+    <p class="ds-section-desc">CSS-only. Three main patterns: float for illustrations, reveal for scroll entrance, shadow-shift for interactive elements.</p>
+
+    <div class="ds-component-box" style="display:flex; gap: var(--space-12); flex-wrap: wrap; align-items: center;">
+      <div class="stack stack-4" style="align-items:center;">
+        <div style="width:80px; height:80px; background:var(--color-black); border:var(--border);" class="animate-float"></div>
+        <span class="type-label-sm text-muted">.animate-float</span>
+      </div>
+      <div class="stack stack-4" style="align-items:center;">
+        <div class="btn btn-ghost btn-lg shadow-shift">Hover me</div>
+        <span class="type-label-sm text-muted">.shadow-shift</span>
+      </div>
+      <div class="stack stack-4" style="align-items:center;">
+        <div class="spin-badge" style="width:80px;height:80px;">
+          <svg class="spin-badge-ring" viewBox="0 0 80 80" width="80" height="80" style="position:absolute;">
+            <defs><path id="sp2" d="M 40,40 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"/></defs>
+            <text font-family="Space Mono,monospace" font-size="7.5" fill="#0a0a0a" letter-spacing="2.5">
+              <textPath href="#sp2">SOLE • CLEAN • SOLE •</textPath>
+            </text>
+          </svg>
+          <span class="spin-badge-center" style="font-size:1rem;">✦</span>
+        </div>
+        <span class="type-label-sm text-muted">.spin-badge</span>
+      </div>
+    </div>
+
+    <div class="ds-code">
+<span class="cm">/* Available animation classes */</span>
+.animate-float          <span class="cm">→  gentle 4s float loop for illustrations</span>
+.animate-pulse-border   <span class="cm">→  shadow pulse for attention/CTA</span>
+.shadow-shift           <span class="cm">→  hover: translate(6px,6px) + shadow collapse</span>
+.reveal                 <span class="cm">→  initial state (opacity:0, y:28px)</span>
+.reveal.visible         <span class="cm">→  triggered state (opacity:1, y:0)</span>
+
+<span class="cm">/* Stagger delays */</span>
+.delay-1  <span class="vl">→  0.08s</span>
+.delay-2  <span class="vl">→  0.16s</span>
+.delay-3  <span class="vl">→  0.24s</span>
+.delay-4  <span class="vl">→  0.32s</span>
+
+<span class="cm">/* JS scroll reveal (no GSAP required) */</span>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting));
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));</div>
+  </section>
+
+  <!-- FOOTER -->
+  <div style="background: var(--color-black); color: var(--color-white); padding: var(--space-6) var(--container-pad); display:flex; justify-content:space-between; align-items:center; border-top: var(--border);">
+    <span class="type-label-sm" style="opacity:0.5;">SOLE. Design System · v1.0.0 · 2026</span>
+    <span class="type-label-sm" style="opacity:0.5;">Neubrutalism · B&W · Single-File</span>
+  </div>
+
+</main>
+
+<script>
+  // Smooth scroll for sidebar links
+  document.querySelectorAll('.ds-sidebar-item').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Active sidebar highlight
+  const sections = document.querySelectorAll('[id]');
+  const sideLinks = document.querySelectorAll('.ds-sidebar-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        sideLinks.forEach(l => l.style.background = '');
+        const active = document.querySelector(`.ds-sidebar-item[href="#${entry.target.id}"]`);
+        if (active) active.style.background = 'var(--color-cream)';
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
