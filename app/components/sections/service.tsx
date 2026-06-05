@@ -100,28 +100,11 @@ const Service = () => {
         <section className='' id="service">
             <SectionTitle title='Our Service'/>
             <div className="content-wrapper flex items-center justify-center">
-                <div className="card-container flex flex-col items-center justify-center gap-6 py-12 px-6 max-w-7xl">
-                {/* {services.map((s) => (
-                    <div key={s.name} className="price-card border-main h-auto w-full">
-                        <span className="badge badge-outline">{s.tag}</span>
-                        <h2 className="type-display-md">{s.name}</h2>
-                        <p className="price-amount">{s.price}</p>
-                        <ul>
-                            {s.includes.map((include) => (
-                                <li key={include} className="type-label border-b-2">
-                                    -{include}
-                                </li>
-                            ))}
-                        </ul>
-                        {s.freebies && (
-                            <p className="type-label-sm">{s.freebies}</p>
-                        )}
-                    </div>
-                ))} */} 
+                <div className="card-container flex flex-col items-center justify-center gap-12 py-12 px-6 max-w-7xl">
 
                     
                     {/* Featured card */}
-                    <div className="price-card-featured price-card">
+                    <div className="price-card-featured price-card mb-6">
                         <span className={`${featured.tag} badge badge-invert`}>{featured.tag}</span>
                         <div className="flex items-center justify-between pt-4">
                             <h2 className="price-amount">{featured.name}</h2>
@@ -175,7 +158,6 @@ const Service = () => {
                 
             </div>
             
-            {/* Additional Service */}
             
             
                 

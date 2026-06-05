@@ -5,7 +5,7 @@ const Hero = () => {
     const stats = [
         {
             label: "Pairs Cleaned",
-            value: "12+"
+            value: "21k+"
         },
         {
             label: "Average Rating",
@@ -13,7 +13,7 @@ const Hero = () => {
         },
         {
             label: "Turnaround Time",
-            value: "24 hrs"
+            value: "3-7 days"
         }
     ];
     return (

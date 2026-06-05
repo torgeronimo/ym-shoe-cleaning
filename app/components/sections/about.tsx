@@ -1,4 +1,5 @@
 import Button from '../ui/button'
+import Logo from '../ui/logo'
 const About = () => {
     return (
         <section className='h-screen flex flex-col justify-center items-center gap-6'>
@@ -10,6 +11,10 @@ const About = () => {
                 <Button text="ghost" variant="ghost" size="xl"></Button>
             </div>
             <h2 className="type-display-lg font-body">Hello</h2>
+            <div className="border-main">
+                <Logo height={150} width={150} fill="rgb(0,0,0)" viewbox="0 0 1024 1024" />
+            </div>
+            
         </section>
         
     )

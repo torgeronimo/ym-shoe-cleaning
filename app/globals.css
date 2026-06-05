@@ -312,7 +312,9 @@
 .badge-invert  { background: var(--color-white); color: var(--color-black); border-color: var(--color-white); }
 .Luxury{ background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)}
 .Premium{ background: linear-gradient(135deg, #888888 0%, #EAEAEA 25%, #CCCCCC 50%, #F1F1F1 75%, #999999 100%)}
-.Bronze{ background: linear-gradient(135deg, #804A00 0%, #CA8E56 25%, #A05A1A 50%, #E7B07E 75%, #6A3800 100%)}
+.Standard{ background: linear-gradient(135deg, #804A00 0%, #CA8E56 25%, #A05A1A 50%, #E7B07E 75%, #6A3800 100%)}
+
+
 
 .spin-badge {
   width: 110px; height: 110px;
