@@ -10,7 +10,6 @@
       --color-gray-500:     #888888;   /* Secondary text */
       --color-gray-700:     #444444;   /* Body text */
       --color-gray-900:     #1a1a1a;   /* Near-black for contrast layers */
-
       --text-2xs:   0.625rem;   /* 10px — tiny labels */
       --text-xs:    0.72rem;    /* 11.5px — micro tags */
       --text-sm:    0.85rem;    /* 13.6px — captions */
@@ -336,7 +335,9 @@
 }
 @keyframes spin-cw  { to { transform: rotate( 360deg); } }
 @keyframes spin-ccw { to { transform: rotate(-360deg); } }
-
+.diamond{
+  background: linear-gradient(135deg, #E2F1F7 0%, #FFFFFF 25%, #CBDCE2 50%, #F5F9FA 75%, #A1B7C1 100%);
+}
 .VIP {
   background: linear-gradient(135deg, #E2F1F7 0%, #FFFFFF 25%, #CBDCE2 50%, #F5F9FA 75%, #A1B7C1 100%);
   color: #0F171C;
@@ -356,7 +357,6 @@
   box-shadow: var(--shadow-lg);
   padding: var(--space-10);
   position: relative;
-  width:350px;
   height:auto;
 }
 .price-card-featured {

@@ -1,6 +1,12 @@
 import Card from '../ui/card'
 import SectionTitle from '../ui/section-title';
+import { Sparkles, Gift, BadgePercent, Sparkle, Crown } from 'lucide-react';
 const Service = () => {
+    const whyvip=[
+        {title:"Full 5-part clean", desc:"Every part of your shoe, covered", icon:Sparkles},
+        {title:"Free care kit included", desc:"Keep your kicks fresh between visits",icon:Gift},
+        {title:"Best value per peso", desc:"Compared to Gold + kit separately",icon:BadgePercent},
+    ]
 
     type Service = {
         name: string;
@@ -104,23 +110,55 @@ const Service = () => {
 
                     
                     {/* Featured card */}
-                    <div className="price-card-featured price-card mb-6">
-                        <span className={`${featured.tag} badge badge-invert`}>{featured.tag}</span>
-                        <div className="flex items-center justify-between pt-4">
-                            <h2 className="price-amount">{featured.name}</h2>
-                            <p className="price-amount">{featured.price}</p>
+                    <div className='grid grid-cols-1 md:grid-cols-2 bg-black w-full'>
+                        <div className="text-white p-12 w-full mb-6">
+                            <span className={`${featured.tag} badge badge-invert`}>{featured.tag}</span>
+                            <div className="flex items-center justify-between pt-4">
+                                <h2 className="price-amount">{featured.name}</h2>
+                                <p className="price-amount">{featured.price}</p>
+                            </div>
+                            <ul className="price-feature-list">
+                            {featured.includes.map((include) => (
+                                <li key={include} className="type-body-base border-b">
+                                    {include}
+                                </li>
+                            ))}
+                            </ul>
+                            {featured.free && (
+                                <p className="type-label-sm">{featured.free}</p>
+                            )}
                         </div>
-                        <ul className="price-feature-list">
-                        {featured.includes.map((include) => (
-                            <li key={include} className="type-body-base border-b">
-                                {include}
-                            </li>
-                        ))}
-                        </ul>
-                        {featured.free && (
-                            <p className="type-label-sm">{featured.free}</p>
-                        )}
+                        
+                        <div className='relative overflow-hidden text-white md:border-l-2 border-t-2 border-neutral-900 p-12'>
+                            
+                            <div className='flex flex-col justify-start gap-4'>
+                                <h2 className='type-display-sm'>WHY GO VIP?</h2>
+                                {whyvip.map((w)=>{
+                                    const Icon = w.icon;
+                                    return(
+                                        <div key={w.title} className='z-20 flex items-center gap-4 type-body-base'>
+                                            <div className='h-10 w-10 bg-neutral-900 flex items-center justify-center rounded-full'>
+                                                <Icon className='w-6 h-6 text-neutral-400'/>
+                                            </div>
+                                            
+                                            <div>
+                                                <p>{w.title}</p>
+                                                <p className='text-neutral-600'>{w.desc}</p>
+                                            </div>
+                                        </div>
+                                    )                   
+                                })}
+                                <div className='absolute -bottom-20 sm:right-0 -right-10'>
+                                    <Crown className='md:w-70 md:h-70 w-50 h-50 -z-50 fill-neutral-600' strokeWidth={0}/>
+                                </div>
+                            </div>
+                            
+                                
+                                
+                            
+                        </div>
                     </div>
+                    
                     {/* Rest */}
                     <div className="flex flex-wrap justify-center lg:grid lg:grid-cols-3 grid-cols-1 gap-4">
                         {rest.map((r)=>(
