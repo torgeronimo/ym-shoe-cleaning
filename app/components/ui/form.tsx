@@ -35,6 +35,21 @@
 import { useState } from "react";
 import Button from "./button";
 
+const branches = [
+    { name: 'YM Flagship Store' },
+    { name: 'YM - Calamba City Bayan' },
+    { name: 'YM - Sto. Tomas City' },
+    { name: 'YM - San Pablo City' },
+    { name: 'YM Las Piñas - BF Resort' },
+    { name: 'YM Silang - Westgrove' },
+    { name: 'YM Los Baños - UPLB' },
+    { name: 'YM Quezon - Tayabas' },
+    { name: 'YM Batangas - Alitagtag' },
+    { name: 'YM Quezon City - Novaliches' },
+    { name: 'YM Cavite - Rosario' },
+    { name: 'YM - Legazpi Albay' }
+]
+
 const additionalServices = [
     { id: "reglue", label: "Full Reglue", price: 2499 },
     { id: "deodorizing", label: "Deodorizing", price: 199 },
@@ -62,6 +77,7 @@ const additionalServices = [
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedServices, setSelectedServices] = useState<string[]>([]);
     const [serviceType, setServiceType] = useState("YM Special");
+    const [ymBranch, setYmBranch] = useState("YM - Flagship Store")
     const [rushService, setRushService] = useState(false);
 
     const toggleService = (id: string) => {
@@ -131,6 +147,26 @@ const additionalServices = [
                 className="input"
             />
 
+             {/* Branches */}
+            <div className="flex flex-col gap-2">
+                <label className="label">BRANCH</label>
+                <select
+                    name="branch"
+                    id="branch"
+                    className="select input"
+                    value={ymBranch}
+                    onChange={(e) => setYmBranch(e.target.value)}
+                >
+                    
+                    {branches.map((branch)=>(
+                        <option key={branch.name} value={branch.name}>
+                            {branch.name}
+                        </option>
+                    ))}
+                </select>
+            
+            </div>
+
             {/* SERVICE TYPE */}
             <label className="label">SERVICE TYPE</label>
             <select
@@ -169,6 +205,7 @@ const additionalServices = [
                 )}
                 <Button text="Add Service" variant="ghost" onClick={() => setIsModalOpen(true)}/>
             </div>
+            
 
             {/* NOTES */}
             <label className="label">NOTES</label>

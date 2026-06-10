@@ -33,7 +33,7 @@ const DEFAULT_FAQS: FAQItem[] = [
     category: "SERVICE",
     question: "How long does a standard clean take?",
     answer:
-      "Standard turnaround is 3–5 business days. Express 24-hour service is available for an additional fee. Drop-off and pick-up times are confirmed at booking.",
+      "Standard turnaround is 3–7 business days. Express 24-hour service is available for an additional fee. Drop-off and pick-up times are confirmed at booking.",
   },
   {
     id: "faq-3",
@@ -66,9 +66,9 @@ const DEFAULT_FAQS: FAQItem[] = [
   {
     id: "faq-7",
     category: "LOGISTICS",
-    question: "Do you offer mail-in service?",
+    question: "Do you offer pick up service?",
     answer:
-      "We do. Pack your kicks securely, ship to our facility, and we'll return them via insured courier. All mail-in orders include complimentary shoe trees.",
+      "We do. Pack your kicks securely, we'll book a courier and return them via insured courier.",
   },
   {
     id: "faq-8",

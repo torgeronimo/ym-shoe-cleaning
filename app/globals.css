@@ -75,7 +75,7 @@
       /* Shadow on dark backgrounds */
       --shadow-invert-sm: 3px 3px 0px rgba(255,255,255,0.25);
       --shadow-invert-md: 6px 6px 0px rgba(255,255,255,0.2);
-      --shadow-invert-lg:  10px 10px 0px red;
+      --shadow-invert-lg:  10px 10px 0px rgba(255, 91, 91, 0.2);
 
     /* BORDERS
         ────────
@@ -117,7 +117,7 @@
   /* Shadow on dark backgrounds */
   --shadow-invert-sm: 3px 3px 0px rgba(255,255,255,0.25);
   --shadow-invert-md: 6px 6px 0px rgba(255,255,255,0.2);
-  --shadow-invert-lg:  10px 10px 0px red;
+  --shadow-invert-lg:  10px 10px 0px rgba(100, 100, 100, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -356,7 +356,7 @@
   box-shadow: var(--shadow-lg);
   padding: var(--space-10);
   position: relative;
-  width:400px;
+  width:350px;
   height:auto;
 }
 .price-card-featured {

@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 
 interface ButtonProps{
   text?: string;
@@ -6,6 +8,7 @@ interface ButtonProps{
   className?:string;
   href?: string;
   onClick?: () => void;
+  icon?: LucideIcon;
 }
 const variantClasses = {
   // primary: 'bg-black text-white border-main shadow-(--shadow-md) inline items-center justify-center font-(--font-body) hover:translate-x-1.5 hover:translate-y-1.5 hover:shadow-none duration-200',
@@ -25,11 +28,12 @@ const sizeClasses = {
 };
 
 
-export default function Button({ text, variant = 'primary', size = 'md',href, onClick,  className}: ButtonProps) {
+
+export default function Button({ text, variant = 'primary', size = 'md',href, onClick,  className, icon:Icon}: ButtonProps) {
   if (href) {
     return (
       <a className={`${variantClasses[variant]} ${sizeClasses[size]}`} href={href} onClick={onClick}>
-        {text || "Button"}
+        {text || "Button"} {Icon && <Icon className="w-4 h-4 mr-2 inline-block" />} 
       </a>
     );
   }
@@ -38,7 +42,7 @@ export default function Button({ text, variant = 'primary', size = 'md',href, on
       className={`${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
     >
-      {text || "Button"}
+      {text || "Button"} {Icon && <Icon className="w-4 h-4 mr-2 inline-block" />} 
     </button>
   );
 }

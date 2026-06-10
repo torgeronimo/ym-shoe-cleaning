@@ -100,7 +100,7 @@ const Service = () => {
         <section className='' id="service">
             <SectionTitle title='Our Service'/>
             <div className="content-wrapper flex items-center justify-center">
-                <div className="card-container flex flex-col items-center justify-center gap-12 py-12 px-6 max-w-7xl">
+                <div className="card-container flex flex-col items-center justify-center gap-12 py-12 px-4 max-w-7xl">
 
                     
                     {/* Featured card */}
@@ -122,7 +122,7 @@ const Service = () => {
                         )}
                     </div>
                     {/* Rest */}
-                    <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+                    <div className="flex flex-wrap justify-center lg:grid lg:grid-cols-3 grid-cols-1 gap-4">
                         {rest.map((r)=>(
                             
                             //Short cut for only if card props is similar to r.
@@ -134,7 +134,7 @@ const Service = () => {
                     </div>
 
                     {/* Cap Service */}
-                    <div className="w-full py-4 border-t-4 flex flex-col justify-center items-center md:justify-start md:items-start">
+                    <div className="w-full py-4 border-t-4 flex flex-col justify-center items-center md:justify-start md:items-start px-4">
                         <h2 className="type-display-lg py-4">Cap Service</h2>
                         <div className="grid grid-cols-1 md:flex gap-4">
                             {capCleaning.map((c)=>(

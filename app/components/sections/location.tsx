@@ -1,7 +1,7 @@
 import React from 'react'
 import SectionTitle from '../ui/section-title'
 import Button from '../ui/button'
-import {MapPin, Phone} from 'lucide-react'
+import {MapPin, Phone, ArrowUpRight} from 'lucide-react'
 
 
 export default function Location () {
@@ -84,13 +84,13 @@ export default function Location () {
                     YM
                 </h2>
             </div>
-            <SectionTitle title="Our Location"/>
-            <div className='flex items-center justify-center px-12 border'>
-                <div className='content-wrapper grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 border-red-400 border w-full md:max-w-7xl '>
+            <SectionTitle title="Our Branches"/>
+            <div className='flex items-center justify-center xl:px-12 px-4'>
+                <div className='content-wrapper grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 w-full md:max-w-7xl'>
                     {branches.map((b) => (
                         <div
                             key={b.name}
-                            className='shadow-invert-md col-span-1 border-main bg-white w-full flex flex-col h-full'
+                            className='col-span-1 border-main bg-white w-full flex flex-col h-full'
                         >
                             <div className='header flex flex-col items-center justify-center py-4 bg-black text-white w-full'>
                                 <h2 className='type-display-sm text-center px-2'>{b.name}</h2>
@@ -113,7 +113,7 @@ export default function Location () {
                                 </div>
                                 
                                 
-                                <Button variant='ghost' text='Get Direction' className='mt-auto w-full border pt-2' />
+                                <Button variant='ghost' text='Get Direction' icon={ArrowUpRight} className='mt-auto w-full border pt-2' />
                                 
                             </div>
                         </div>
