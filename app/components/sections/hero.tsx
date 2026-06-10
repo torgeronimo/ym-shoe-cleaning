@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../ui/button'
+import Image from 'next/image'
 
 const Hero = () => {
     const stats = [
@@ -17,7 +18,7 @@ const Hero = () => {
         }
     ];
     return (
-        <section className="border-b-4 border-b-4">
+        <section className="border-b-4">
             <div className="grid md:grid-cols-2 grid-cols-1 w-full gap-4 items-stretch border">
 
                 <div className="col-span-1 flex flex-col gap-4 px-12 py-8">
@@ -61,8 +62,9 @@ const Hero = () => {
                 </div>
 
                 <div className="col-span-1 relative">
-                    <img
-                        src="https://images.unsplash.com/photo-1707109322463-f8e22fcaef4e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    <Image
+                        fill
+                        src="/YM/ym1.jpg"
                         className="w-full h-full object-cover"
                         alt="Hero"/>
                 </div>

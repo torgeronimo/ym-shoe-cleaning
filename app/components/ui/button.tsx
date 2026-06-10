@@ -3,6 +3,7 @@ interface ButtonProps{
   text?: string;
   variant?: 'primary' | 'cream' | 'invert' | 'ghost';
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  className?:string;
   href?: string;
   onClick?: () => void;
 }
@@ -24,7 +25,7 @@ const sizeClasses = {
 };
 
 
-export default function Button({ text, variant = 'primary', size = 'md',href, onClick,  }: ButtonProps) {
+export default function Button({ text, variant = 'primary', size = 'md',href, onClick,  className}: ButtonProps) {
   if (href) {
     return (
       <a className={`${variantClasses[variant]} ${sizeClasses[size]}`} href={href} onClick={onClick}>
@@ -34,7 +35,7 @@ export default function Button({ text, variant = 'primary', size = 'md',href, on
   }
   return (
     <button 
-      className={`${variantClasses[variant]} ${sizeClasses[size]}`}
+      className={`${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
     >
       {text || "Button"}
