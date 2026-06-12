@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Bebas_Neue, Space_Mono, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
-
+import Preloader from "./components/ui/preloader";
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -38,7 +38,10 @@ export default function RootLayout({
       lang="en"
       className={`${bebasNeue.variable} ${spaceMono.variable} ${barlowCondensed.variable} ${barlowCondensed.variable}${montserrat.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Preloader minDuration={2200} />
+        {children}
+        </body>
     </html>
   );
 }

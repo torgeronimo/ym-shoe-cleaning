@@ -172,7 +172,7 @@ const Service = () => {
                     </div>
 
                     {/* Cap Service */}
-                    <div className="w-full py-4 border-t-4 flex flex-col justify-center items-center md:justify-start md:items-start px-4">
+                    <div className="w-full py-4 border-t-4 flex flex-col justify-center items-center md:justify-start md:items-start">
                         <h2 className="type-display-lg py-4">Cap Service</h2>
                         <div className="grid grid-cols-1 md:flex gap-4">
                             {capCleaning.map((c)=>(

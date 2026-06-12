@@ -8,7 +8,7 @@ const Contact = () => {
         <section id="contact">
             <SectionTitle title="Contact"/>
             <div className="flex items-center justify-center">
-                <div className="xl:min-w-7xl sm:w-fit w-full">
+                <div className="xl:min-w-7xl md:w-fit  w-full">
                     <div className="grid grid-cols-1 md:grid-cols-2 mx-auto">
                         <div className="col-span-1 px-6 py-6 bg-black text-gray-500 type-body-base">
                             <div className="header flex flex-col pb-4">
