@@ -103,7 +103,7 @@ const Service = () => {
 
     const [featured, ...rest] = services;
     return (
-        <section className='' id="service">
+        <section className='' id="services">
             <SectionTitle title='Our Service'/>
             <div className="content-wrapper flex items-center justify-center">
                 <div className="card-container flex flex-col items-center justify-center gap-12 py-12 px-4 max-w-7xl">

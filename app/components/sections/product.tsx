@@ -5,6 +5,7 @@ const Product = () => {
     return (
         <section>
             <SectionTitle title='Our Product' />
+            <h1>Hello world</h1>
         </section>
     )
 }
