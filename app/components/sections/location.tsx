@@ -78,7 +78,7 @@ export default function Location () {
     ];
     return (
         
-        <section className='relative'>
+        <section id='branches' className='relative'>
             <div className="absolute inset-0 -z-999 flex items-center justify-center pointer-events-none">
                 <h2 className="text-[12rem] md:text-[45rem] font-black  uppercase text-gray-500/50 select-none">
                     YM

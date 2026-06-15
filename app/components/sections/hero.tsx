@@ -18,7 +18,7 @@ const Hero = () => {
         }
     ];
     return (
-        <section className="border-b-4">
+        <section id='home' className="border-b-4">
             <div className="grid xl:pl-12 md:pl-6 pl-4 md:grid-cols-2 grid-cols-1 w-full gap-4 items-stretch border">
 
                 <div className="col-span-1 flex flex-col gap-4 py-8">
