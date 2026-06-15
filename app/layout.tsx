@@ -36,11 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-<<<<<<< HEAD
-      className={`${bebasNeue.variable} ${spaceMono.variable} ${barlowCondensed.variable} ${barlowCondensed.variable}${montserrat.variable} h-full antialiased `}
-=======
       className={`${bebasNeue.variable} ${spaceMono.variable} ${barlowCondensed.variable} ${barlowCondensed.variable}${montserrat.variable} h-full antialiased scroll-smooth`}
->>>>>>> feat/footer-modification
     >
       <body className="min-h-full flex flex-col">
         <Preloader minDuration={2200} />
