@@ -8,7 +8,7 @@ const Feed = () => {
     
     return (
         
-        <section>
+        <section id="feed">
             <SectionTitle title="Our feed"/>
             <div className="flex items-center justify-center px-4 lg:px-6 xl:px-12">
                 <div className="max-w-7xl w-full flex flex-col md:grid md:grid-cols-2 md:grid-rows-6 lg:grid-cols-4 lg:grid-rows-4 gap-6 ">
