@@ -160,7 +160,7 @@ const Service = () => {
                     </div>
                     
                     {/* Rest */}
-                    <div className="flex flex-wrap justify-center lg:grid lg:grid-cols-3 grid-cols-1 gap-4">
+                    <div className="flex flex-wrap justify-center lg:grid lg:grid-cols-3 grid-cols-1 w-full gap-6 lg:gap-0">
                         {rest.map((r)=>(
                             
                             //Short cut for only if card props is similar to r.
@@ -174,7 +174,7 @@ const Service = () => {
                     {/* Cap Service */}
                     <div className="w-full py-4 border-t-4 flex flex-col justify-center items-center md:justify-start md:items-start">
                         <h2 className="type-display-lg py-4">Cap Service</h2>
-                        <div className="grid grid-cols-1 md:flex gap-4">
+                        <div className="grid grid-cols-1 md:flex gap-6 md:gap-10">
                             {capCleaning.map((c)=>(
                                 <Card key={c.name} {...c}/>
                             ))}

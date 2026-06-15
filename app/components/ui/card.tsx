@@ -10,7 +10,7 @@ type CardProps={
 
 const Card=({name, tag, price,free, includes}:CardProps) => {
     return (
-        <div key={name} className="price-card col-span-1">
+        <div key={name} className="price-card col-span-1 w-92 h-50">
             <span className={`${tag} badge badge-outline`}>{tag}</span>
             <div className="flex items-center justify-between pt-4">
                 <h2 className="price-amount">{name}</h2>

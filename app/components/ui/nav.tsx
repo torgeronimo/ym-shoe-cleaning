@@ -101,7 +101,7 @@ export default function Navbar() {
     if (!tl.current) return;
 
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "clip";
       tl.current.play();
     } else {
       document.body.style.overflow = "";
@@ -115,6 +115,18 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  //Closes the sm Nav
+  useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth >= 768 && isOpen) {
+      setIsOpen(false);
+    }
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, [isOpen]);
 
   const handleLinkClick = () => setIsOpen(false);
 
