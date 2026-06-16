@@ -1,7 +1,7 @@
 import React from 'react'
 import SectionTitle from '../ui/section-title'
 import Button from '../ui/button'
-import {MapPin, Phone, ArrowUpRight, Gauge, Megaphone, GraduationCap, Headset,BanknoteArrowUp,ShieldCheck,PhilippinePeso,UsersRound, UserRound} from 'lucide-react'
+import {MapPin, Phone, Send,ArrowUpRight, Gauge, Megaphone, GraduationCap, Headset,BanknoteArrowUp,ShieldCheck,PhilippinePeso,UsersRound, UserRound} from 'lucide-react'
 
 
 export default function Location () {
@@ -174,7 +174,7 @@ export default function Location () {
                         </div>
                     ))}
                 </div>
-
+                {/* Franchise Details */}
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4 py-8 border-t-4'>
                     <div className=''>
                         <h3 className='type-display-sm'>What you get</h3>
@@ -210,6 +210,15 @@ export default function Location () {
                                 </div>
                             );
                         })}
+                    </div>
+                </div>
+                <div className='bg-black text-white flex flex-col md:flex-row md:justify-between px-4 md:py-12 py-8'>
+                    <div className='pb-6 md:pb-0'>
+                        <h3 className='type-display-md'>Ready to be part of YM?</h3>
+                        <p className='text-neutral-400'>Send us an email and we&apos;ll get back to you within 24 hours.</p>
+                    </div>
+                    <div>
+                        <Button variant='invert' size='lg' text='send us an email' icon={Send} href='mailto:ymshoecleaning@gmail.com'/>
                     </div>
                 </div>
             </div>
