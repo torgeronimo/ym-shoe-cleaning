@@ -60,6 +60,8 @@ const additionalServices = [
     { id: "color-retouch", label: "Color Retouch", price: 499 },
     { id: "oxidation", label: "Unyellow Oxidation", price: 599 },
     { id: "repaint", label: "Unyellow Repaint", price: 699 },
+    { id: "balsam", label: "Balsam", price: 399 },
+    { id: "cleaning-kit", label: "YM Cleaning Kit", price: 499 },
     ];
     
     const servicePrices: Record<string, number> = {
