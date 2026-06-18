@@ -186,7 +186,7 @@ export default function FAQ({
       : items.filter((i) => i.category === activeFilter);
 
   return (
-    <section
+    <section id="faq"
       className=""
       aria-label="Frequently Asked Questions"
     >

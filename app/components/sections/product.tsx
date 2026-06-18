@@ -22,7 +22,7 @@ const Product = () => {
     ]
 
     return (
-        <section>
+        <section id="product">
             <SectionTitle title='Our Product' />
             <div className='max-w-7xl mx-auto gap-4 flex flex-col md:flex-wrap md:flex-row items-center justify-center'>
                 {productList.map((product)=>(

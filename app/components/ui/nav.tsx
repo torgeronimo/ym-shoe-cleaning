@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
-import {Menu} from 'lucide-react'
+
 
 /**
  * SOLE. Navbar + Full-Page Menu
@@ -23,11 +23,13 @@ import {Menu} from 'lucide-react'
  */
 
 const NAV_LINKS = [
-  { label: "Home", href: "#" },
+  { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Reviews", href: "#reviews" },
+  { label: "Feed", href: "#feed" },
+  { label: "Product", href: "#product" },
+  { label: "Branch", href: "#branch" },
   { label: "Contact", href: "#contact" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export default function Navbar() {
@@ -37,6 +39,7 @@ export default function Navbar() {
   const linksRef = useRef<HTMLDivElement>(null);
   const metaRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   // Build the open/close timeline once
   useEffect(() => {
@@ -130,6 +133,49 @@ export default function Navbar() {
 
   const handleLinkClick = () => setIsOpen(false);
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault(); // Stops the URL change
+  
+  const target = document.querySelector(href);
+  if (target) {
+    // Calculates header height dynamically to avoid cutting off your content
+    const navHeight = document.querySelector('nav')?.clientHeight || 0;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    
+    window.scrollTo({
+      top: targetPosition - navHeight,
+      behavior: 'smooth',
+    });
+  }
+};
+
+useEffect(() => {
+  // Finds all <section id="..."> tags on your page
+  const sections = document.querySelectorAll('section[id]');
+  
+  const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // When a section takes up 50% of the viewport, mark it active
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      { 
+        // Adjusts the trigger boundary line closer to the top of your screen
+        rootMargin: '-20% 0px -60% 0px' 
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    // Cleans up observers when component unmounts
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
   return (
     <>
       {/* NAVBAR */}
@@ -144,27 +190,38 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-10">
-          {NAV_LINKS.slice(0, 3).map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                className="font-body font-bold text-sm tracking-[0.2em] uppercase text-[#0a0a0a] hover:opacity-50 transition-opacity"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+        <ul className="hidden lg:flex items-center gap-10">
+          {NAV_LINKS.map((link) => {
+            const isActive = activeSection === link.href;
+            return (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  onClick={(e) => handleScroll(e, link.href)}
+                  className={`font-body font-bold text-sm tracking-[0.2em] uppercase text-[#0a0a0a] transition-all duration-200
+                    ${isActive ? 'opacity-100 border-main px-4 py-2 shadow-sm decoration-[2px]' : 'opacity-60 hover:opacity-100'}
+                  `}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
           <li>
-            <Link
+            <a
               href="#contact"
-              className="font-body font-bold text-sm tracking-[0.2em] uppercase bg-[#0a0a0a] text-[#f5f2ee] px-6 py-2.5 border-[3px] border-[#0a0a0a] shadow-[3px_3px_0_#555] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
+              onClick={(e) => handleScroll(e, '#contact')}
+              className={`font-body font-bold text-sm tracking-[0.2em] uppercase px-6 py-2.5 border-[3px] border-[#0a0a0a] transition-all block
+                ${activeSection === '#contact' 
+                  ? 'bg-[#555] text-[#f5f2ee] shadow-none' 
+                  : 'bg-[#0a0a0a] text-[#f5f2ee] shadow-[3px_3px_0_#555] hover:shadow-none'
+                }
+              `}
             >
               Book Now
-            </Link>
+            </a>
           </li>
         </ul>
-
       </nav>
 
       {/* Menu toggle — fixed so it stays above the overlay and acts as the close button when open */}
@@ -173,7 +230,7 @@ export default function Navbar() {
         onClick={() => setIsOpen((v) => !v)}
         aria-expanded={isOpen}
         aria-label={isOpen ? "Close menu" : "Open menu"}
-        className={`md:hidden fixed top-5 right-6 md:right-10 z-[70] w-12 h-12 flex items-center justify-center transition-colors ${
+        className={`lg:hidden fixed top-5 right-6 md:right-10 z-[70] w-12 h-12 flex items-center justify-center transition-colors ${
           isOpen
             ? "bg-[#f5f2ee] border-[#f5f2ee] [&_span]:bg-[#0a0a0a]"
             : "bg-[#f5f2ee] border-[#0a0a0a] hover:bg-[#0a0a0a] [&:hover_span]:bg-[#f5f2ee] [&_span]:bg-[#0a0a0a]"
@@ -195,7 +252,7 @@ export default function Navbar() {
       </button>
 
       {/* FULL PAGE MENU OVERLAY */}
-      <div ref={overlayRef} className="fixed inset-0 z-[55] h-dvh">
+      <div ref={overlayRef} className="fixed inset-0 z-55 h-dvh">
         <div
           ref={panelRef}
           className="absolute inset-0 h-dvh bg-[#0a0a0a] text-[#f5f2ee] flex flex-col"
@@ -214,9 +271,13 @@ export default function Navbar() {
               ref={linksRef}
               className="flex-1 flex flex-col justify-center gap-0 md:gap-1 px-6 md:px-16 py-6 md:py-8"
             >
-              {NAV_LINKS.map((link, i) => (
+
+              
+              {NAV_LINKS.map((link, i) => {
+                const isActive = activeSection === link.href;
+                return(
                 <div key={link.label} className="overflow-hidden">
-                  <Link
+                  <a
                     href={link.href}
                     onClick={handleLinkClick}
                     className="menu-link group flex items-baseline gap-3 md:gap-6 py-1.5 md:py-2"
@@ -224,12 +285,15 @@ export default function Navbar() {
                     <span className="font-mono text-[10px] md:text-sm text-[#777777] tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="font-display text-4xl sm:text-5xl md:text-7xl leading-none tracking-tight group-hover:opacity-50 group-hover:translate-x-3 transition-all duration-300">
+                    <span className={`font-display text-4xl sm:text-5xl md:text-7xl leading-none tracking-tight group-hover:opacity-50 group-hover:translate-x-3 transition-all duration-300 
+                    ${isActive ? 'translate-x-3 opacity-50' : 'opacity-100'}
+                    `}>
                       {link.label}
                     </span>
-                  </Link>
+                  </a>
                 </div>
-              ))}
+                )
+            })}
             </div>
 
             {/* Side info / meta block */}
@@ -248,10 +312,10 @@ export default function Navbar() {
                   +63 912 345 6789
                 </Link>
                 <Link
-                  href="mailto:hello@sole.studio"
+                  href="mailto:ymshoecleaning@gmail.com"
                   className="block font-body text-base text-[#cccccc] hover:opacity-60 transition-opacity mt-1"
                 >
-                  hello@sole.studio
+                  ymshoecleaning@gmail.com
                 </Link>
               </div>
 
