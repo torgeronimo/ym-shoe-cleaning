@@ -28,6 +28,12 @@ const montserrat = Montserrat({
 });
 
 
+export const metadata: Metadata = {
+  title: "YM Premium Shoe Cleaning & Restoration | Laguna",
+  description: "Professional sneaker cleaning, suede restoration, and boot repair in Laguna. Drop off or schedule a pickup today!",
+};
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
