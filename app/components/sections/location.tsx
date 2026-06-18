@@ -169,7 +169,7 @@ export default function Location () {
                                 </div>
                                 
                                 {b.href && (
-                                    <Button variant='ghost' text='Get Direction' href={b.href} icon={ArrowUpRight} className='mt-auto w-full border pt-2' />
+                                    <Button variant='ghost' text='Get Direction' href={b.href} icon={ArrowUpRight} rel="noopener noreferrer" target="_blank" className='mt-auto w-full border pt-2' />
                                 )}
                                 
                                 

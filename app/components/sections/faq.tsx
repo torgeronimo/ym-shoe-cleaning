@@ -209,6 +209,7 @@ export default function FAQ({
                 ? "bg-black text-white"
                 : "bg-transparent text-black hover:bg-cream",
             ].join(" ")}
+            
           >
             {cat}
           </button>
@@ -231,6 +232,12 @@ export default function FAQ({
         </p>
         <a
           href="#contact"
+          onClick={(e)=>{e.preventDefault();
+            const contactSection = document.getElementById("contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
           className={[
             "inline-flex items-center gap-2 no-underline",
             "font-body font-bold text-[0.85rem] tracking-[0.15em] uppercase",
