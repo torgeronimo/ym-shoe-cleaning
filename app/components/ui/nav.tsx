@@ -26,7 +26,6 @@ const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
   { label: "Feed", href: "#feed" },
-  { label: "Product", href: "#product" },
   { label: "Branch", href: "#branch" },
   { label: "Contact", href: "#contact" },
   { label: "FAQ", href: "#faq" },
@@ -182,7 +181,7 @@ useEffect(() => {
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-10 py-5 bg-[#f5f2ee] border-b-[3px] border-[#0a0a0a]">
         <Link
           href="#"
-          className="font-display text-3xl md:text-4xl tracking-wide text-[#0a0a0a] flex items-center gap-1"
+          className="font-display text-3xl md:text-4xl tracking-wide text-[#0a0a0a] flex items-center gap-1 font-bold"
           onClick={handleLinkClick}
         >
           YM
@@ -332,17 +331,6 @@ useEffect(() => {
                 </p>
               </div>
 
-              <div className="menu-meta-item flex gap-4">
-                {["IG", "FB", "TT"].map((label) => (
-                  <Link
-                    key={label}
-                    href="#"
-                    className="font-mono text-[10px] tracking-[0.15em] uppercase border-b-2 border-[#f5f2ee] pb-0.5 hover:opacity-60 transition-opacity"
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
             </div>
           </div>
 

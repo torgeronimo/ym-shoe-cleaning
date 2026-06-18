@@ -232,7 +232,7 @@ export default function FAQ({
           Still have questions?
         </p>
         <a
-          href="/contact"
+          href="#contact"
           className={[
             "inline-flex items-center gap-2 no-underline",
             "font-body font-bold text-[0.85rem] tracking-[0.15em] uppercase",

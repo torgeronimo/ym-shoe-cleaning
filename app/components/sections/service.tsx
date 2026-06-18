@@ -1,6 +1,7 @@
 import Card from '../ui/card'
 import SectionTitle from '../ui/section-title';
 import { Sparkles, Gift, BadgePercent, Sparkle, Crown } from 'lucide-react';
+import Image from 'next/image'
 const Service = () => {
     const whyvip=[
         {title:"Full 5-part clean", desc:"Every part of your shoe, covered", icon:Sparkles},
@@ -82,6 +83,14 @@ const Service = () => {
             name: "Un-yellow Repaint",
             price: "₱699"
         },
+        {
+            name: "Balsam",
+            price: "₱399"
+        },
+        {
+            name: "YM Cleaning Kit",
+            price: "₱499"
+        },
     ];
 
     const capCleaning = [
@@ -100,6 +109,22 @@ const Service = () => {
             free:"FREE Deodorizing & Reshape"
         }
     ];
+    
+    const productList = [
+        {
+            name:"Balsam",
+            desc:"Made with Coconut Oil, Beeswax, Kaolin Clay, Charcoal Powder, Rose Water.",
+            src:"/YM/product/balm2.jpg",
+            alt:"Balsam"
+        },
+        {
+            name:"YM Cleaning Kit",
+            desc:"YM Cleaning Spray, Wipe Cloth, Brush, YM socks.",
+            src:"/YM/product/p1.jpg",
+            alt:"YM Cleaning Kit"
+        },
+        
+    ]
 
     const [featured, ...rest] = services;
     return (
@@ -180,6 +205,25 @@ const Service = () => {
                             ))}
                         </div>
                     </div>
+                    <div className='w-full py-4 border-t-4 flex flex-col justify-center items-center md:justify-start md:items-start'>
+                        <h2 className='type-display-lg pb-8'>our Product</h2>
+                        <div className=' gap-4 flex flex-col md:flex-wrap md:flex-row items-center'>
+
+                            {productList.map((product)=>(
+                                <div key={product.name} className='border-4'>
+                                    <div className="flex items-center justify-center relative h-[300px] w-[450px]">
+                                        <span className='absolute top-2 left-2 badge badge-solid rounded z-10'>Available in Store/Add-on</span>
+                                        <Image fill className='object-cover' alt={product.alt} src={product.src}/>
+                                    </div>
+                                    
+                                    <div className='type-body-base px-2 py-4 bg-black text-white'>
+                                        <p className='type-display-sm'>{product.name}</p>
+                                        <p className='text-neutral-400'>{product.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     <div className="w-full py-4 border-t-4">
                         <h2 className="type-display-lg">Additional Service</h2>
                         <div className="add-wrapper">
@@ -191,7 +235,6 @@ const Service = () => {
                             
                         </div>
                     </div>
-                    
                 </div>
                 
             </div>

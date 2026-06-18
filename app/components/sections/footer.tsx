@@ -19,7 +19,7 @@ export default function Footer() {
   return (
     <footer className="font-body text-[#0a0a0a]">
       {/* Main grid */}
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] border-t-[3px] border-[#0a0a0a]">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr] border-t-[3px] border-[#0a0a0a]">
         {/* Brand column */}
         <div className="flex flex-col p-8 md:p-12 border-b-[3px] md:border-b-0 md:border-r-[3px] border-[#0a0a0a] relative overflow-hidden">
           <div className="font-display text-7xl leading-none mb-4 flex items-center gap-1 font-bold">
@@ -69,7 +69,7 @@ export default function Footer() {
             Navigation
           </div>
           <ul className="space-y-3">
-            {["Services", "Feed", "Product", "Branches", "Contact", "FAQ"].map(
+            {["Home","Services", "Feed", "Branch", "Contact", "FAQ"].map(
               (item) => (
                 <li key={item}>
                   <Link
@@ -95,6 +95,14 @@ export default function Footer() {
             </li>
             <li className="text-[1.05rem] tracking-wide text-[#444444]">
               Mon–Sat 9am–7pm
+            </li>
+            <li className="pt-2">
+              <Link
+                href="mailto:ymshoecleaning@gmail.com"
+                className="text-[1.1rem] font-bold text-[#0a0a0a] hover:opacity-60 transition-opacity"
+              >
+                ymshoecleaning@gmail.com
+              </Link>
             </li>
             <li className="pt-2">
               <Link
