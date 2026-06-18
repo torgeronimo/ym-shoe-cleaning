@@ -9,6 +9,8 @@ interface ButtonProps{
   href?: string;
   onClick?: () => void;
   icon?: LucideIcon;
+  rel?:string;
+  target?:string;
 }
 const variantClasses = {
   // primary: 'bg-black text-white border-main shadow-(--shadow-md) inline items-center justify-center font-(--font-body) hover:translate-x-1.5 hover:translate-y-1.5 hover:shadow-none duration-200',
@@ -29,10 +31,10 @@ const sizeClasses = {
 
 
 
-export default function Button({ text, variant = 'primary', size = 'md',href, onClick,  className, icon:Icon}: ButtonProps) {
+export default function Button({ text, variant = 'primary', size = 'md',href, onClick,  className, icon:Icon, rel, target}: ButtonProps) {
   if (href) {
     return (
-      <a className={`${variantClasses[variant]} ${sizeClasses[size]}`} href={href} onClick={onClick}>
+      <a className={`${variantClasses[variant]} ${sizeClasses[size]}`} href={href} rel={rel} target={target} onClick={onClick}>
         {text || "Button"} {Icon && <Icon className="w-4 h-4 mr-2 inline-block" />} 
       </a>
     );

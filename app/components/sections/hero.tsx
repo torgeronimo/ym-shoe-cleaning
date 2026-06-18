@@ -38,8 +38,8 @@ const Hero = () => {
                         </p>
 
                     <div className="flex gap-4 mt-6 pb-12 border-b-4">
-                        <Button text="Book a clean" variant="primary" size="lg" />
-                        <Button text="View Service" variant="ghost" size="lg" />
+                        <Button text="Book a clean" href="#contact" variant="primary" size="lg" />
+                        <Button text="View Service" href="#services" variant="ghost" size="lg" />
                     </div>
 
                     <div className="flex gap-12 w-fit">

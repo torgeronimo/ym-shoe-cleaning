@@ -13,67 +13,84 @@ export default function Location () {
         {name:"YM San Pablo", contact:"0997 140  6900", src:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.0409220231745!2d121.31340417593842!3d14.074760886351667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd5dd9a58c42bb%3A0x4dc7d442e1296baa!2sYM%20Shoe%20Cleaning%20-%20San%20Pablo%20City!5e0!3m2!1sen!2sph!4v1780539937796!5m2!1sen!2sph"},
     ]
 
+    interface Branch {
+        name:string;
+        location:string;
+        contact:string;
+        href?:string;
+    }
     const branches = [
     {
         name: "YM Flagship Store",
         location: "Brgy. Bucal, Calamba City, Laguna",
-        contact: "0997 140 6900"
+        contact: "0997 140 6900",
+        href:"https://maps.app.goo.gl/NkNZRHoL9huMYqN86"
         
     },
     {
         name: "YM - Calamba City Bayan",
         location: "Brgy. San Juan, Calamba City, Laguna",
-        contact: "0997 273 8272"
+        contact: "0997 273 8272",
+        href:"https://maps.app.goo.gl/NWxWvzGdZJgCvS5R9"
     },
     {
         name: "YM - Sto. Tomas City",
         location: "Brgy. San Rafael, Santo Tomas City, Batangas",
-        contact: "0997 140 6900"
+        contact: "0997 140 6900",
+        href:"https://maps.app.goo.gl/p3VKskhno1jSnASb7"
     },
     {
         name: "YM - San Pablo City",
         location: "Brgy. 6-E, Cosico Avenue, San Pablo City, Laguna",
-        contact: "0927 149 4660"
+        contact: "0927 149 4660",
+        href:"https://maps.app.goo.gl/9CoWy3d51okayUy4A"
     },
     {
         name: "YM Las Piñas - BF Resort",
         location: "Onelia Jose St, BF Resort Village, Talon Dos, Las Piñas",
-        contact: "0963 950 8628"
+        contact: "0963 950 8628",
+        href:"https://maps.app.goo.gl/DSHgkD6UsnQtEXUe6"
     },
     {
         name: "YM Silang - Westgrove",
         location: "South Forbes, Silang Cavite",
-        contact: "0920 963 8032"
+        contact: "0920 963 8032",
+        href:"https://maps.app.goo.gl/ULwBdmLtQtA5W3RS7"
     },
     {
         name: "YM Los Baños - UPLB",
         location: "Brgy. Batong Malake",
-        contact: "0967 455 9546"
+        contact: "0967 455 9546",
+        
     },
     {
         name: "YM Quezon - Tayabas",
         location: "29 A Mabini St. Brgy San Diego Zone 2, Tayabas City",
-        contact: "0947 541 7188"
+        contact: "0947 541 7188",
+        href:"https://maps.app.goo.gl/L3GZgzcoEuvnaxmz9"
     },
     {
         name: "YM Batangas - Alitagtag",
         location: "88 Muzon I, Alitagtag, Batangas",
-        contact: "0915 885 9850"
+        contact: "0915 885 9850",
+        href:"https://maps.app.goo.gl/9er2tG1cAgpBaqDy5"
     },
     {
         name: "YM Quezon City - Novaliches",
         location: "Katipunan Road, Goodwill Homes 1, San Bartolome, Novaliches, Quezon City",
-        contact: "0945 845 9817"
+        contact: "0945 845 9817",
+        href:"https://maps.app.goo.gl/jM1Fi7nGqJFaRTjg9"
     },
     {
         name: "YM Cavite - Rosario",
         location: "GF M.D. Consuelo Bldg., PNOC Drive, Tejeros Convention, Rosario, Cavite",
-        contact: "0969 105 6192"
+        contact: "0969 105 6192",
+        href:"https://maps.app.goo.gl/cyb7TBugDa9tu5vp9"
     },
     {
         name: "YM - Legazpi Albay",
         location: "Mayon Loft Co-Living-Dr. Building, Brgy., 42 Rawis, Legazpi",
-        contact: "N/A"
+        contact: "N/A",
     }
     ];
     const franchiseInfo = [
@@ -151,8 +168,10 @@ export default function Location () {
                                     </div>
                                 </div>
                                 
+                                {b.href && (
+                                    <Button variant='ghost' text='Get Direction' href={b.href} icon={ArrowUpRight} className='mt-auto w-full border pt-2' />
+                                )}
                                 
-                                <Button variant='ghost' text='Get Direction' icon={ArrowUpRight} className='mt-auto w-full border pt-2' />
                                 
                             </div>
                         </div>

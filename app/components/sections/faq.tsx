@@ -187,8 +187,6 @@ export default function FAQ({
 
   return (
     <section id="faq"
-      className=""
-      aria-label="Frequently Asked Questions"
     >
       {/* ── Section header ── */}
       <SectionTitle title="FAQ"/>
